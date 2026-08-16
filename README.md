@@ -1,5 +1,7 @@
 # Internship Tracker
 
+**Live site:** https://bsifert.github.io/Internship-tracker/
+
 A single-page web app for tracking your internship search: which companies are
 open (`LIVE`), opening soon (`IMMINENT`), on the radar (`WATCH`), or not yet
 researched, plus priority/urgency, whether you've applied, cover letter
