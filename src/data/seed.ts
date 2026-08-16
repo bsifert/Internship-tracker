@@ -1,9 +1,16 @@
 import type { Internship } from "../types";
 
+/**
+ * The sheet had no posting links, follow-up dates or history, so those are
+ * filled in by `normalizeAll` when the seed is loaded rather than being
+ * repeated as empty values on all 85 rows.
+ */
+type SeedRow = Omit<Internship, "url" | "followUpDate" | "history">;
+
 // Seeded from Brady Sifert's "Internship Tracker 2027" Google Sheet (imported 2026-08-15).
 // Edit freely in the app — this file is only the starting dataset used the first time
-// the app runs on a fresh browser (see useLocalStorage's seeding logic).
-export const seedInternships: Internship[] = [
+// the app runs on a fresh browser (see useInternships' seeding logic).
+export const seedInternships: SeedRow[] = [
   {
     "id": "burns-mcdonnell",
     "company": "Burns & McDonnell",

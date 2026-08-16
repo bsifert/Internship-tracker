@@ -1,4 +1,5 @@
 import type { Internship } from "../types";
+import { isNoteTruncated } from "../types";
 import { CoverLetterBadge, PriorityBadge, StatusBadge } from "./Badges";
 import { cx, daysUntil, deadlineTone, formatDate } from "../lib/utils";
 
@@ -13,6 +14,8 @@ export function InternshipCard({
 }) {
   const days = daysUntil(item.deadline);
   const tone = deadlineTone(days);
+  const followUpDays = daysUntil(item.followUpDate);
+  const clipped = isNoteTruncated(item);
 
   return (
     <div
@@ -77,13 +80,31 @@ export function InternshipCard({
         </div>
       )}
 
+      {item.followUpDate && (
+        <div
+          className={cx(
+            "mt-1 text-xs font-medium",
+            followUpDays !== null && followUpDays <= 0
+              ? "text-sky-600 dark:text-sky-400"
+              : "text-slate-500 dark:text-slate-400",
+          )}
+        >
+          Follow up {formatDate(item.followUpDate)}
+        </div>
+      )}
+
       {item.researchNotes && (
         <p className="mt-2 line-clamp-2 text-xs text-slate-500 dark:text-slate-400">
           {item.researchNotes}
         </p>
       )}
+      {clipped && (
+        <p className="mt-1 text-[11px] text-amber-700 dark:text-amber-400">
+          ✂️ Note clipped in the original sheet export
+        </p>
+      )}
 
-      <div className="mt-3 flex items-center justify-between border-t border-slate-100 pt-3 dark:border-slate-800">
+      <div className="mt-3 flex items-center justify-between gap-2 border-t border-slate-100 pt-3 dark:border-slate-800">
         <label className="flex cursor-pointer items-center gap-1.5 text-xs font-medium text-slate-600 dark:text-slate-300">
           <input
             type="checkbox"
@@ -93,13 +114,25 @@ export function InternshipCard({
           />
           Applied
         </label>
-        <button
-          type="button"
-          onClick={onEdit}
-          className="text-xs font-medium text-slate-500 opacity-0 transition-opacity hover:text-slate-900 group-hover:opacity-100 dark:text-slate-400 dark:hover:text-slate-100"
-        >
-          Edit →
-        </button>
+        <div className="flex items-center gap-3">
+          {item.url && (
+            <a
+              href={item.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs font-medium text-blue-600 hover:underline dark:text-blue-400"
+            >
+              Apply ↗
+            </a>
+          )}
+          <button
+            type="button"
+            onClick={onEdit}
+            className="text-xs font-medium text-slate-500 opacity-0 transition-opacity hover:text-slate-900 focus:opacity-100 group-hover:opacity-100 dark:text-slate-400 dark:hover:text-slate-100"
+          >
+            Edit →
+          </button>
+        </div>
       </div>
     </div>
   );

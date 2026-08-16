@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import type { Internship, ResearchStatus } from "../types";
 import { RESEARCH_STATUSES } from "../types";
-import { PRIORITY_WEIGHT } from "../lib/utils";
+import { compareByUrgency } from "../lib/urgency";
 import { InternshipCard } from "./InternshipCard";
 import { ResearchBadge } from "./Badges";
 
@@ -28,12 +28,7 @@ export function BoardView({
       byStatus.get(item.researchStatus)?.push(item);
     }
     for (const list of byStatus.values()) {
-      list.sort((a, b) => {
-        if (a.applied !== b.applied) return a.applied ? 1 : -1;
-        const pw = PRIORITY_WEIGHT[a.priority] - PRIORITY_WEIGHT[b.priority];
-        if (pw !== 0) return pw;
-        return a.company.localeCompare(b.company);
-      });
+      list.sort(compareByUrgency);
     }
     return byStatus;
   }, [items]);

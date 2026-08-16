@@ -43,17 +43,23 @@ export function Dashboard({ items }: { items: Internship[] }) {
       (i) => i.priority === "High" && !i.applied,
     ).length;
     const coverLettersReady = items.filter(
-      (i) => i.coverLetter === "Drafted" || i.coverLetter === "Complete" || i.coverLetter === "Submitted",
+      (i) =>
+        i.coverLetter === "Drafted" ||
+        i.coverLetter === "Complete" ||
+        i.coverLetter === "Submitted",
     ).length;
     const withContact = items.filter((i) => i.contact.trim().length > 0).length;
-    const upcomingDeadlines = items.filter((i) => {
+    const dueSoon = items.filter((i) => {
       const d = daysUntil(i.deadline);
-      return d !== null && d >= 0 && d <= 14;
+      return d !== null && d >= 0 && d <= 14 && !i.applied;
     }).length;
     const overdue = items.filter((i) => {
       const d = daysUntil(i.deadline);
       return d !== null && d < 0 && !i.applied;
     }).length;
+    const interviewing = items.filter(
+      (i) => i.status === "Interviewing" || i.status === "Offer",
+    ).length;
 
     return {
       total,
@@ -63,29 +69,57 @@ export function Dashboard({ items }: { items: Internship[] }) {
       highPriorityOpen,
       coverLettersReady,
       withContact,
-      upcomingDeadlines,
+      dueSoon,
       overdue,
+      interviewing,
     };
   }, [items]);
 
   return (
-    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
       <StatCard label="Tracked" value={stats.total} sub="total companies" />
       <StatCard
         label="Applied"
         value={`${stats.applied} / ${stats.total}`}
-        sub={stats.total ? `${Math.round((stats.applied / stats.total) * 100)}% complete` : undefined}
+        sub={
+          stats.total
+            ? `${Math.round((stats.applied / stats.total) * 100)}% of list`
+            : undefined
+        }
         tone="good"
       />
-      <StatCard label="Live now" value={stats.live} sub="postings open" tone="good" />
-      <StatCard label="Imminent" value={stats.imminent} sub="opening soon" tone="warn" />
+      <StatCard
+        label="Overdue"
+        value={stats.overdue}
+        sub="deadline passed, not applied"
+        tone={stats.overdue > 0 ? "bad" : "default"}
+      />
+      <StatCard
+        label="Due within 14d"
+        value={stats.dueSoon}
+        sub="not applied yet"
+        tone={stats.dueSoon > 0 ? "warn" : "default"}
+      />
       <StatCard
         label="High priority, not applied"
         value={stats.highPriorityOpen}
         sub="apply next"
         tone={stats.highPriorityOpen > 0 ? "bad" : "default"}
       />
-      <StatCard label="Cover letters" value={stats.coverLettersReady} sub="drafted or further" />
+      <StatCard label="Live now" value={stats.live} sub="postings open" tone="good" />
+      <StatCard label="Imminent" value={stats.imminent} sub="opening soon" tone="warn" />
+      <StatCard
+        label="Cover letters"
+        value={stats.coverLettersReady}
+        sub="drafted or further"
+      />
+      <StatCard label="Have a contact" value={stats.withContact} sub="warm intro possible" />
+      <StatCard
+        label="In play"
+        value={stats.interviewing}
+        sub="interviewing or offer"
+        tone={stats.interviewing > 0 ? "good" : "default"}
+      />
     </div>
   );
 }

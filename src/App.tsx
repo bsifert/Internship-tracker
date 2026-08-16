@@ -1,12 +1,17 @@
-import { useMemo, useState } from "react";
-import type { Internship } from "./types";
+import { useCallback, useMemo, useState } from "react";
+import type { Internship, NewInternship } from "./types";
 import { useInternships } from "./hooks/useInternships";
+import { useBackupReminder } from "./hooks/useBackupReminder";
 import { Dashboard } from "./components/Dashboard";
+import { NextActions } from "./components/NextActions";
+import { BackupBanner } from "./components/BackupBanner";
 import { FilterBar } from "./components/FilterBar";
 import { BoardView } from "./components/BoardView";
 import { TableView } from "./components/TableView";
+import { BulkBar } from "./components/BulkBar";
 import { InternshipModal } from "./components/InternshipModal";
 import { DataMenu } from "./components/DataMenu";
+import { downloadJson } from "./lib/csv";
 import { defaultFilters, type Filters, type View } from "./lib/filterTypes";
 
 function App() {
@@ -16,15 +21,22 @@ function App() {
     addInternship,
     updateInternship,
     deleteInternship,
+    deleteMany,
     toggleApplied,
+    bulkUpdate,
     replaceAll,
+    mergeIn,
     resetToSeed,
   } = useInternships();
+
+  const { daysSinceBackup, shouldRemind, markBackedUp, snooze } =
+    useBackupReminder();
 
   const [view, setView] = useState<View>("board");
   const [filters, setFilters] = useState<Filters>(defaultFilters);
   const [modalItem, setModalItem] = useState<Internship | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
+  const [selected, setSelected] = useState<Set<string>>(new Set());
 
   const sectors = useMemo(() => {
     const set = new Set(items.map((i) => i.sector.trim()).filter(Boolean));
@@ -66,15 +78,35 @@ function App() {
     setModalOpen(true);
   };
 
-  const closeModal = () => setModalOpen(false);
+  const closeModal = useCallback(() => setModalOpen(false), []);
 
-  const handleSave = (data: Omit<Internship, "id" | "createdAt" | "updatedAt">) => {
+  const handleSave = (data: NewInternship) => {
     if (modalItem) {
       updateInternship(modalItem.id, data);
     } else {
       addInternship(data);
     }
     setModalOpen(false);
+  };
+
+  const handleBackupNow = () => {
+    downloadJson(items);
+    markBackedUp();
+  };
+
+  const selectedIds = useMemo(() => Array.from(selected), [selected]);
+
+  const clearSelection = useCallback(() => setSelected(new Set()), []);
+
+  const handleBulkDelete = () => {
+    if (
+      confirm(
+        `Remove ${selectedIds.length} companies from your tracker? This can't be undone.`,
+      )
+    ) {
+      deleteMany(selectedIds);
+      clearSelection();
+    }
   };
 
   return (
@@ -90,7 +122,13 @@ function App() {
             </p>
           </div>
           <div className="flex items-center gap-2">
-            <DataMenu items={items} onImport={replaceAll} onReset={resetToSeed} />
+            <DataMenu
+              items={items}
+              onReplaceAll={replaceAll}
+              onMergeIn={mergeIn}
+              onReset={resetToSeed}
+              onBackedUp={markBackedUp}
+            />
             <button
               type="button"
               onClick={openAddModal}
@@ -103,7 +141,21 @@ function App() {
       </header>
 
       <main className="mx-auto max-w-7xl space-y-6 px-4 py-6">
+        {shouldRemind && (
+          <BackupBanner
+            daysSinceBackup={daysSinceBackup}
+            onBackup={handleBackupNow}
+            onSnooze={snooze}
+          />
+        )}
+
         <Dashboard items={items} />
+
+        <NextActions
+          items={items}
+          onEdit={openEditModal}
+          onToggleApplied={toggleApplied}
+        />
 
         <FilterBar
           filters={filters}
@@ -122,13 +174,24 @@ function App() {
             onEdit={openEditModal}
             onToggleApplied={toggleApplied}
             onDelete={deleteInternship}
+            selected={selected}
+            onSelectedChange={setSelected}
+          />
+        )}
+
+        {view === "table" && selectedIds.length > 0 && (
+          <BulkBar
+            count={selectedIds.length}
+            onPatch={(patch) => bulkUpdate(selectedIds, patch)}
+            onDelete={handleBulkDelete}
+            onClear={clearSelection}
           />
         )}
       </main>
 
       <footer className="mx-auto max-w-7xl px-4 text-xs text-slate-400 dark:text-slate-600">
         Autosaved to this browser at {new Date(lastSavedAt).toLocaleTimeString()}. Use
-        "Data → Export JSON backup" to keep a copy or move to another device.
+        “Data → Export JSON backup” to keep a copy or move to another device.
       </footer>
 
       {modalOpen && (
