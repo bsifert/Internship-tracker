@@ -1,0 +1,38 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+
+html {
+  color-scheme: light dark;
+}
+
+body {
+  @apply bg-slate-50 text-slate-900 antialiased;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    @apply bg-slate-950 text-slate-100;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.4);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.6);
+}
