@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Brady Sifert — Projects</title>
+<meta name="description" content="Projects by Brady Sifert, including Internship Tracker, a React + TypeScript app for running an internship search.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@112,600;125,800&family=IBM+Plex+Mono:wght@400;500&family=Public+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+/* Layout: a single drawing sheet. Each project gets an engineering-style title block
+   (boxed label/value grid) above its write-up, the way a drawing set labels each sheet. */
+:root {
+  --paper: #f5f6f3;
+  --sheet: #ffffff;
+  --ink: #18242f;
+  --ink-soft: #4a5866;
+  --rule: #cfd5d6;
+  --accent: #0b6470;
+  --accent-wash: #e3eff0;
+  --todo: #fff1b8;
+  --todo-ink: #5c4600;
+
+  --font-display: "Archivo", "Arial Narrow", system-ui, sans-serif;
+  --font-body: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  --measure: 66ch;
+  --gutter: clamp(16px, 4vw, 40px);
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #10171d; --sheet: #161f27; --ink: #e6ebee; --ink-soft: #a3b0ba;
+    --rule: #2c3842; --accent: #5cc3cf; --accent-wash: #15313a;
+    --todo: #4a3d0c; --todo-ink: #ffe9a3;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #10171d; --sheet: #161f27; --ink: #e6ebee; --ink-soft: #a3b0ba;
+  --rule: #2c3842; --accent: #5cc3cf; --accent-wash: #15313a;
+  --todo: #4a3d0c; --todo-ink: #ffe9a3;
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 400 1.0625rem/1.65 var(--font-body);
+  padding-inline: var(--gutter);
+  padding-block: 0 4rem;
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: var(--accent); text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+.wrap { max-width: 1040px; margin-inline: auto; }
+
+/* Placeholder text you still need to fill in. Remove the class once it's real. */
+.todo { background: var(--todo); color: var(--todo-ink); padding: 0 0.3em; border-radius: 3px; }
+
+/* ---------- top bar ---------- */
+.topbar {
+  display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between;
+  gap: 0.5rem 1.5rem; padding-block: 1.25rem; border-bottom: 1px solid var(--rule);
+  font-family: var(--font-mono); font-size: 0.8125rem;
+}
+.topbar .mark { color: var(--ink); text-decoration: none; font-weight: 500; letter-spacing: 0.02em; }
+.topbar nav { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+.topbar nav a { color: var(--ink-soft); text-decoration: none; }
+.topbar nav a:hover { color: var(--accent); }
+
+/* ---------- hero ---------- */
+.hero { padding-block: clamp(3rem, 9vw, 6rem) clamp(2.5rem, 6vw, 4rem); }
+.eyebrow {
+  font-family: var(--font-mono); font-size: 0.8125rem; text-transform: uppercase;
+  letter-spacing: 0.08em; color: var(--ink-soft); margin: 0 0 1rem;
+}
+.hero h1 {
+  font-family: var(--font-display); font-weight: 800; font-stretch: 125%;
+  font-size: clamp(2.6rem, 8.5vw, 5.25rem); line-height: 0.98; letter-spacing: -0.02em;
+  margin: 0; text-wrap: balance;
+}
+.hero .lede { font-size: clamp(1.125rem, 2.2vw, 1.3rem); max-width: 38ch; margin: 1.5rem 0 0; color: var(--ink-soft); }
+.hero .lede strong { color: var(--ink); font-weight: 600; }
+.links { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2rem; padding: 0; list-style: none; }
+.btn {
+  display: inline-flex; align-items: center; gap: 0.4em; padding: 0.6rem 1rem;
+  border: 1px solid var(--ink); color: var(--ink); text-decoration: none;
+  font-family: var(--font-mono); font-size: 0.875rem; border-radius: 2px;
+  transition: background-color .15s, color .15s;
+}
+.btn:hover { background: var(--ink); color: var(--paper); text-decoration: none; }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--sheet); }
+.btn.primary:hover { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+
+/* ---------- section headings ---------- */
+.section { padding-block: 3rem 1rem; border-top: 1px solid var(--rule); }
+.section > h2 {
+  font-family: var(--font-mono); font-weight: 500; font-size: 0.8125rem;
+  text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-soft); margin: 0 0 2rem;
+}
+
+/* ---------- project sheet ---------- */
+.project { background: var(--sheet); border: 1px solid var(--rule); }
+.project-head { padding: clamp(1.25rem, 3.5vw, 2.25rem); display: grid; gap: 1rem; }
+.project h3 {
+  font-family: var(--font-display); font-weight: 600; font-stretch: 112%;
+  font-size: clamp(1.75rem, 4.5vw, 2.6rem); line-height: 1.05; margin: 0; text-wrap: balance;
+}
+.project .summary { margin: 0; max-width: var(--measure); font-size: 1.125rem; }
+.project .links { margin-top: 0.5rem; }
+
+/* Title block: the boxed label/value strip from a drawing sheet. */
+.titleblock {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  border-top: 1px solid var(--rule); margin: 0;
+}
+.titleblock div { padding: 0.75rem clamp(1.25rem, 3.5vw, 2.25rem) 0.85rem; border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); min-width: 0; }
+.titleblock dt { font-family: var(--font-mono); font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-soft); }
+.titleblock dd { margin: 0.15rem 0 0; font-weight: 500; font-size: 0.9375rem; }
+
+.shot { margin: 0; border-bottom: 1px solid var(--rule); background: var(--paper); }
+.shot img { width: 100%; }
+.shot figcaption { font-family: var(--font-mono); font-size: 0.75rem; color: var(--ink-soft); padding: 0.6rem clamp(1.25rem, 3.5vw, 2.25rem); border-top: 1px solid var(--rule); background: var(--sheet); }
+
+.project-body {
+  padding: clamp(1.25rem, 3.5vw, 2.25rem);
+  display: grid; gap: 2.5rem; grid-template-columns: minmax(0, 1fr);
+}
+@media (min-width: 860px) { .project-body { grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); } }
+.project-body h4 {
+  font-family: var(--font-mono); font-weight: 500; font-size: 0.75rem; text-transform: uppercase;
+  letter-spacing: 0.1em; color: var(--accent); margin: 0 0 0.6rem;
+}
+.project-body p { margin: 0 0 1.25rem; max-width: var(--measure); }
+.project-body ul { margin: 0 0 1.25rem; padding-left: 1.1rem; }
+.project-body li { margin-bottom: 0.45rem; }
+.project-body li::marker { color: var(--accent); }
+.notes { display: grid; gap: 1.5rem; align-content: start; }
+.note { border-left: 2px solid var(--accent); padding-left: 1rem; }
+.note p { margin: 0; font-size: 0.975rem; color: var(--ink-soft); }
+.note p strong { color: var(--ink); font-weight: 600; }
+.shots-pair { display: grid; grid-template-columns: minmax(0, 1fr); }
+
+.stack { display: flex; flex-wrap: wrap; gap: 0.4rem; padding: 0; margin: 0; list-style: none; }
+.stack li { font-family: var(--font-mono); font-size: 0.75rem; padding: 0.2rem 0.55rem; background: var(--accent-wash); color: var(--ink); border-radius: 2px; margin: 0; }
+
+/* ---------- about / contact ---------- */
+.about { display: grid; gap: 2rem; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 860px) { .about { grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); } }
+.about p { margin: 0 0 1.1rem; max-width: var(--measure); }
+.facts { margin: 0; display: grid; gap: 0.9rem; align-content: start; }
+.facts dt { font-family: var(--font-mono); font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-soft); }
+.facts dd { margin: 0.1rem 0 0; }
+
+.contact p { max-width: var(--measure); margin: 0 0 1rem; }
+.contact .big {
+  font-family: var(--font-display); font-weight: 600; font-stretch: 112%;
+  font-size: clamp(1.4rem, 4vw, 2rem); overflow-wrap: anywhere;
+}
+
+footer { margin-top: 3rem; padding-top: 1.25rem; border-top: 1px solid var(--rule); font-family: var(--font-mono); font-size: 0.75rem; color: var(--ink-soft); }
+
+/* Printing or saving as PDF: drop chrome, keep it to clean pages. */
+@media print {
+  :root { --paper: #fff; --sheet: #fff; --ink: #000; --ink-soft: #333; --accent: #0b6470; --todo: transparent; --todo-ink: #000; }
+  body { padding: 0; font-size: 11pt; }
+  .topbar nav, .links { display: none; }
+  .project, .shot { break-inside: avoid; }
+  a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 0.8em; color: #333; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="topbar">
+    <a class="mark" href="#top">Brady Sifert</a>
+    <nav aria-label="Sections">
+      <a href="#projects">Projects</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <!-- EDIT: confirm school / major / year. Anything highlighted yellow is a placeholder. -->
+      <p class="eyebrow">University of Maryland · <span class="todo">Major, Class of 20XX</span></p>
+      <h1>Brady Sifert</h1>
+      <p class="lede">I build <strong>practical software</strong> for problems I actually have, then keep using it and keep improving it.</p>
+      <ul class="links">
+        <li><a class="btn primary" href="#projects">See projects ↓</a></li>
+        <li><a class="btn" href="https://github.com/bsifert">GitHub ↗</a></li>
+        <!-- EDIT: point these at your real résumé PDF and LinkedIn, or delete the lines. -->
+        <li><a class="btn" href="resume.pdf">Résumé (PDF)</a></li>
+        <li><a class="btn" href="https://www.linkedin.com/in/your-handle">LinkedIn ↗</a></li>
+      </ul>
+    </section>
+
+    <section class="section" id="projects">
+      <h2>Projects</h2>
+
+      <article class="project" aria-labelledby="p-tracker">
+        <div class="project-head">
+          <h3 id="p-tracker">Internship Tracker</h3>
+          <p class="summary">A web app that turns an 85-company internship spreadsheet into a ranked to-do list. It tells me which application needs attention today, and why.</p>
+          <ul class="links">
+            <li><a class="btn primary" href="https://bsifert.github.io/Internship-tracker/">Open the live app ↗</a></li>
+            <li><a class="btn" href="https://github.com/bsifert/Internship-tracker">Source code ↗</a></li>
+          </ul>
+        </div>
+
+        <dl class="titleblock">
+          <div><dt>Role</dt><dd>Designer &amp; developer</dd></div>
+          <div><dt>Built</dt><dd>2026</dd></div>
+          <div><dt>Type</dt><dd>Single-page web app</dd></div>
+          <div><dt>Status</dt><dd>Live</dd></div>
+        </dl>
+
+        <div class="shots-pair">
+          <figure class="shot">
+            <img src="assets/tracker-overview.jpg" width="2720" height="1400" alt="Internship Tracker dashboard: ten summary tiles (tracked, applied, overdue, due within 14 days and more) above a 'Do these next' list ranking companies by deadline and follow-up urgency.">
+            <figcaption>Dashboard and “Do these next” ranking. Company names are sample data.</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="assets/tracker-board.jpg" width="2720" height="1240" alt="Urgency board with four columns (Live, Imminent, Watch, Unresearched), each holding company cards with priority, cover-letter status and deadline badges.">
+            <figcaption>Urgency board: companies grouped by how soon their postings open.</figcaption>
+          </figure>
+        </div>
+
+        <div class="project-body">
+          <div>
+            <h4>The problem</h4>
+            <p>My internship search lived in a Google Sheet with 85 companies, each with a research status, priority, deadline, contacts and notes. The sheet could store all of it but couldn’t tell me what to do next. Deadlines slipped past, and follow-ups were easy to forget.</p>
+
+            <h4>What I built</h4>
+            <ul>
+              <li><strong>“Do these next” ranking.</strong> Every company is scored on overdue deadlines, follow-ups that are due, open postings and postings about to open, weighted by priority. The most pressing item is always at the top.</li>
+              <li><strong>Urgency board and table.</strong> A board groups companies by research status. A sortable, filterable table supports multi-select bulk edits.</li>
+              <li><strong>Application history.</strong> Every status change is timestamped, so each company has a timeline from first look to offer.</li>
+              <li><strong>Spreadsheet round-trip.</strong> Exports to JSON or CSV. Importing a CSV from Google Sheets merges by company name: it updates existing rows, adds new ones, and leaves out-of-file columns alone.</li>
+              <li><strong>No account needed.</strong> Data autosaves in the browser. Because that is fragile, the app reminds me to download a backup when the last one gets old.</li>
+            </ul>
+          </div>
+
+          <div class="notes">
+            <div>
+              <h4>Built with</h4>
+              <ul class="stack">
+                <li>TypeScript</li><li>React 19</li><li>Vite</li><li>Tailwind CSS</li><li>oxlint</li><li>GitHub Actions</li><li>GitHub Pages</li>
+              </ul>
+            </div>
+            <div class="note">
+              <p><strong>Safe upgrades for saved data.</strong> New fields like posting links and follow-up dates were added after the app was already in use. Every record loaded from storage or from a backup is normalized first, so older saves never crash the newer version.</p>
+            </div>
+            <div class="note">
+              <p><strong>Cleaning up the original data.</strong> The sheet had been exported through a PDF, which cut long notes off mid-sentence. The app detects those rows and flags them to be rewritten.</p>
+            </div>
+            <div class="note">
+              <p><strong>Automated deploys.</strong> A GitHub Actions workflow type-checks, builds and publishes the site to GitHub Pages automatically.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!--
+        ADD MORE PROJECTS: copy the whole <article class="project"> … </article> block above,
+        paste it here, and change the text, links and images. Projects don't have to be
+        software; class projects, design work, research and lab builds all fit this layout.
+        Put screenshots or photos in the assets/ folder.
+      -->
+    </section>
+
+    <section class="section" id="about">
+      <h2>About</h2>
+      <div class="about">
+        <div>
+          <!-- EDIT: rewrite in your own words. Two short paragraphs is plenty. -->
+          <p>I’m a student at the University of Maryland studying <span class="todo">your major</span>. I’m looking for a <span class="todo">Summer 2027 internship in …</span>.</p>
+          <p>I like turning messy, manual processes into tools that do the bookkeeping. The Internship Tracker started as a spreadsheet I kept losing track of, and it now runs my own search.</p>
+        </div>
+        <dl class="facts">
+          <div><dt>Looking for</dt><dd><span class="todo">Summer 2027 internship</span></dd></div>
+          <div><dt>Based in</dt><dd><span class="todo">City, State</span> · open to relocating</dd></div>
+          <div><dt>Tools</dt><dd>TypeScript, React, Git &amp; GitHub, <span class="todo">Excel, AutoCAD, …</span></dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="section contact" id="contact">
+      <h2>Contact</h2>
+      <p>I’m happy to walk through any of this in more detail.</p>
+      <!-- EDIT: replace with the email you want employers to use. -->
+      <p class="big"><a href="mailto:you@example.com"><span class="todo">you@example.com</span></a></p>
+      <ul class="links">
+        <li><a class="btn" href="https://github.com/bsifert">github.com/bsifert ↗</a></li>
+        <li><a class="btn" href="https://www.linkedin.com/in/your-handle">LinkedIn ↗</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>Brady Sifert · Updated October 2026</footer>
+</div>
+</body>
+</html>
