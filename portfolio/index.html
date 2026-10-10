@@ -4,182 +4,301 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Brady Sifert Portfolio</title>
-<meta name="description" content="Brady Sifert, mechanical engineering student at the University of Maryland, seeking a Summer 2027 mechanical engineering internship. Projects in FEA-driven part design, suspension, robotics and structures.">
+<meta name="description" content="Brady Sifert, mechanical engineering student at the University of Maryland, seeking a Summer 2027 mechanical engineering internship. Terps Racing suspension and bell crank design, FEA, robotics and structures.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@112,600;125,800&family=IBM+Plex+Mono:wght@400;500&family=Public+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,500;112,600;125,700;125,800&family=IBM+Plex+Mono:wght@400;500&family=Public+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
 <style>
-/* Layout: a drawing set. Each project is a sheet with an engineering title block
-   (boxed label/value grid) above its write-up, the way a drawing labels each sheet. */
+/* Layout: a drawing set. A dark drafting-table band opens and closes the page; each
+   project in between is a white drawing sheet with headline figures up top and an
+   engineering title block along its edge. */
 :root {
-  --paper: #f5f6f3;
+  --paper: #f2f3f0;
   --sheet: #ffffff;
-  --ink: #18242f;
-  --ink-soft: #4a5866;
-  --rule: #cfd5d6;
-  --accent: #0b6470;
-  --accent-wash: #e3eff0;
+  --ink: #14212b;
+  --ink-soft: #4b5965;
+  --rule: #d6dbdc;
+  --rule-strong: #14212b;
+  --accent: #0b6773;
+  --accent-wash: #e2eef0;
+  --shadow: rgba(20, 33, 43, 0.14);
+  --nav-bg: rgba(242, 243, 240, 0.86);
+
+  /* Drafting-table band (hero and contact): dark in both themes. */
+  --band: #0f1d27;
+  --band-ink: #eaf0f2;
+  --band-soft: #a3b5c0;
+  --band-line: #7dd4de;
+  --band-rule: rgba(163, 181, 192, 0.22);
+  --band-grid: rgba(125, 212, 222, 0.06);
+  --band-fill: rgba(125, 212, 222, 0.10);
+
+  /* Drawings sit on a light ground in both themes. */
   --drawing-bg: #ffffff;
   --dwg-ink: #18242f;
   --dwg-soft: #5b6874;
-  --dwg-accent: #0b6470;
+  --dwg-accent: #0b6773;
   --dwg-fill: #e3eff0;
 
   --font-display: "Archivo", "Arial Narrow", system-ui, sans-serif;
   --font-body: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
 
-  --measure: 68ch;
+  --measure: 66ch;
   --gutter: clamp(16px, 4vw, 40px);
-  --pad: clamp(1.25rem, 3.5vw, 2.25rem);
+  --pad: clamp(1.25rem, 3.5vw, 2.5rem);
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --paper: #10171d; --sheet: #161f27; --ink: #e6ebee; --ink-soft: #a3b0ba;
-    --rule: #2c3842; --accent: #5cc3cf; --accent-wash: #15313a; --drawing-bg: #f3f5f4;
+    --paper: #0d151b; --sheet: #141e26; --ink: #e6ecef; --ink-soft: #a2b0ba;
+    --rule: #26343e; --rule-strong: #a2b0ba; --accent: #63c7d2; --accent-wash: #15313a;
+    --shadow: rgba(0, 0, 0, 0.45); --nav-bg: rgba(13, 21, 27, 0.86);
+    --band: #0a141b; --band-rule: rgba(163, 181, 192, 0.18); --drawing-bg: #f3f5f4;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --paper: #10171d; --sheet: #161f27; --ink: #e6ebee; --ink-soft: #a3b0ba;
-  --rule: #2c3842; --accent: #5cc3cf; --accent-wash: #15313a; --drawing-bg: #f3f5f4;
+  --paper: #0d151b; --sheet: #141e26; --ink: #e6ecef; --ink-soft: #a2b0ba;
+  --rule: #26343e; --rule-strong: #a2b0ba; --accent: #63c7d2; --accent-wash: #15313a;
+  --shadow: rgba(0, 0, 0, 0.45); --nav-bg: rgba(13, 21, 27, 0.86);
+  --band: #0a141b; --band-rule: rgba(163, 181, 192, 0.18); --drawing-bg: #f3f5f4;
   color-scheme: dark;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: 4.5rem; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 body {
   margin: 0;
   background: var(--paper);
   color: var(--ink);
   font: 400 1.0625rem/1.65 var(--font-body);
-  padding-inline: var(--gutter);
-  padding-block: 0 4rem;
 }
 img { max-width: 100%; height: auto; display: block; }
 a { color: var(--accent); text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
 a:hover { text-decoration-thickness: 2px; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+h1, h2, h3 { text-wrap: balance; }
 
-.wrap { max-width: 1040px; margin-inline: auto; }
-
-/* ---------- top bar ---------- */
-.topbar {
-  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
-  gap: 0.5rem 1.5rem; padding-block: 1.25rem; border-bottom: 1px solid var(--rule);
-  font-family: var(--font-mono); font-size: 0.8125rem;
+.wrap { max-width: 1120px; margin-inline: auto; padding-inline: var(--gutter); }
+.mono-label {
+  font-family: var(--font-mono); font-weight: 500; font-size: 0.75rem;
+  text-transform: uppercase; letter-spacing: 0.1em;
 }
-.topbar .mark { color: var(--ink); text-decoration: none; font-weight: 500; letter-spacing: 0.02em; }
-.topbar nav { display: flex; gap: 0.4rem 1.25rem; flex-wrap: wrap; align-items: center; }
-.topbar nav a { color: var(--ink-soft); text-decoration: none; }
-.topbar nav a:hover { color: var(--accent); }
-.topbar nav a.cta { color: var(--accent); font-weight: 500; }
 
-/* ---------- hero ---------- */
-.hero { padding-block: clamp(2.5rem, 7vw, 4.5rem) clamp(2.5rem, 6vw, 3.5rem); }
+/* ---------- nav ---------- */
+.nav {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10;
+  background: var(--nav-bg); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--rule);
+}
+.nav .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5rem 1.5rem; padding-block: 0.8rem; }
+.nav .mark { font-family: var(--font-display); font-weight: 700; font-stretch: 125%; font-size: 1rem; color: var(--ink); text-decoration: none; letter-spacing: -0.01em; }
+.nav nav { display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem 1.25rem; font-family: var(--font-mono); font-size: 0.8125rem; }
+.nav nav a { color: var(--ink-soft); text-decoration: none; }
+.nav nav a:hover { color: var(--accent); }
+.nav nav a.nav-cta { color: var(--sheet); background: var(--accent); padding: 0.3rem 0.7rem; border-radius: 2px; }
+.nav nav a.nav-cta:hover { color: var(--sheet); background: var(--ink); }
+
+/* ---------- buttons ---------- */
+.links { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 0; padding: 0; list-style: none; }
+.btn {
+  display: inline-flex; align-items: center; gap: 0.45em; padding: 0.7rem 1.1rem;
+  border: 1px solid currentColor; color: var(--ink); text-decoration: none;
+  font-family: var(--font-mono); font-size: 0.875rem; font-weight: 500; border-radius: 2px;
+  transition: background-color .15s, color .15s, border-color .15s;
+}
+.btn:hover { text-decoration: none; }
+
+/* ---------- drafting band (hero + contact) ---------- */
+.band {
+  background-color: var(--band);
+  background-image:
+    linear-gradient(var(--band-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--band-grid) 1px, transparent 1px);
+  background-size: 28px 28px;
+  color: var(--band-ink);
+}
+.band .btn { color: var(--band-ink); border-color: var(--band-soft); }
+.band .btn:hover { background: var(--band-ink); border-color: var(--band-ink); color: var(--band); }
+.band .btn.primary { background: var(--band-line); border-color: var(--band-line); color: var(--band); }
+.band .btn.primary:hover { background: var(--band-ink); border-color: var(--band-ink); }
+
+.hero { padding-block: clamp(2.75rem, 7vw, 5rem) 0; }
+.hero-grid { display: grid; gap: 2.5rem; grid-template-columns: minmax(0, 1fr); align-items: center; }
+@media (min-width: 900px) { .hero-grid { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 3rem; } }
+.hero-copy { min-width: 0; }
 .status {
-  display: inline-flex; align-items: center; gap: 0.55rem; margin: 0 0 1.25rem;
-  font-family: var(--font-mono); font-size: 0.8125rem; color: var(--ink);
-  background: var(--accent-wash); padding: 0.35rem 0.75rem; border-radius: 2px;
+  display: inline-flex; align-items: center; gap: 0.6rem; margin: 0 0 1.5rem;
+  font-family: var(--font-mono); font-size: 0.8125rem; color: var(--band-ink);
+  border: 1px solid var(--band-rule); background: var(--band-fill); padding: 0.4rem 0.8rem; border-radius: 2px;
 }
-.status::before { content: ""; width: 0.55rem; height: 0.55rem; border-radius: 50%; background: var(--accent); flex: none; }
+.status::before { content: ""; width: 0.5rem; height: 0.5rem; border-radius: 50%; background: var(--band-line); box-shadow: 0 0 0 4px var(--band-fill); flex: none; }
 .hero h1 {
   font-family: var(--font-display); font-weight: 800; font-stretch: 125%;
-  font-size: clamp(2.6rem, 8.5vw, 5.25rem); line-height: 0.98; letter-spacing: -0.02em;
-  margin: 0; text-wrap: balance;
+  font-size: clamp(2.8rem, 8vw, 5.5rem); line-height: 0.95; letter-spacing: -0.025em; margin: 0;
 }
-.hero .role {
-  font-family: var(--font-display); font-weight: 600; font-stretch: 112%;
-  font-size: clamp(1.2rem, 2.6vw, 1.6rem); line-height: 1.25; margin: 0.75rem 0 0; color: var(--ink);
-}
-.hero .lede { font-size: clamp(1.0625rem, 2vw, 1.2rem); max-width: 56ch; margin: 1.25rem 0 0; color: var(--ink-soft); }
-.links { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 1.75rem 0 0; padding: 0; list-style: none; }
-.btn {
-  display: inline-flex; align-items: center; gap: 0.4em; padding: 0.6rem 1rem;
-  border: 1px solid var(--ink); color: var(--ink); text-decoration: none;
-  font-family: var(--font-mono); font-size: 0.875rem; border-radius: 2px;
-  transition: background-color .15s, color .15s;
-}
-.btn:hover { background: var(--ink); color: var(--paper); text-decoration: none; }
-.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--sheet); }
-.btn.primary:hover { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+.hero .role { font-family: var(--font-display); font-weight: 500; font-stretch: 100%; font-size: clamp(1.15rem, 2.4vw, 1.5rem); line-height: 1.3; margin: 1rem 0 0; color: var(--band-ink); }
+.hero .facts { margin: 0.6rem 0 0; font-family: var(--font-mono); font-size: 0.8125rem; color: var(--band-soft); letter-spacing: 0.02em; }
+.hero .facts span { white-space: nowrap; }
+.hero .facts span + span::before { content: "·"; margin-inline: 0.6em; color: var(--band-line); }
+.hero .lede { font-size: clamp(1.0625rem, 1.9vw, 1.1875rem); line-height: 1.6; max-width: 52ch; margin: 1.5rem 0 2rem; color: var(--band-soft); }
+.hero .lede strong { color: var(--band-ink); font-weight: 600; }
 
-.hero .titleblock { margin-top: 2.25rem; border: 1px solid var(--rule); border-bottom: 0; border-right: 0; background: var(--sheet); }
-.hero .titleblock div { padding-inline: 1rem; }
-
-/* ---------- section headings ---------- */
-.section { padding-block: 3rem 1rem; border-top: 1px solid var(--rule); }
-.section > h2 {
-  font-family: var(--font-mono); font-weight: 500; font-size: 0.8125rem;
-  text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-soft); margin: 0 0 2rem;
+.hero-fig { margin: 0; min-width: 0; }
+.hero-fig svg { display: block; width: 100%; max-width: 520px; height: auto; margin-inline: auto; overflow: visible; }
+.hero-fig figcaption { font-family: var(--font-mono); font-size: 0.75rem; color: var(--band-soft); text-align: center; margin-top: 0.75rem; }
+.hero-fig figcaption b { color: var(--band-ink); font-weight: 500; }
+.h-fill { fill: var(--band-fill); }
+.h-line { fill: none; stroke: var(--band-line); stroke-width: 0.45; stroke-linejoin: round; }
+.h-hole { stroke-width: 0.35; }
+.h-cl { fill: none; stroke: var(--band-soft); stroke-width: 0.14; stroke-dasharray: 3 0.8 0.6 0.8; opacity: 0.7; }
+.h-dim { fill: none; stroke: var(--band-soft); stroke-width: 0.16; }
+.h-head { fill: var(--band-soft); }
+.h-txt { font-family: var(--font-mono); font-size: 2.5px; fill: var(--band-soft); }
+.h-txt.lead { fill: var(--band-ink); }
+@media (prefers-reduced-motion: no-preference) {
+  .hero-fig .h-line { stroke-dasharray: 1; stroke-dashoffset: 0; animation: draw 1.6s cubic-bezier(.6,.05,.3,1) both; }
+  .hero-fig .h-hole { animation-delay: .5s; }
+  .hero-fig .h-anno { animation: fade .6s ease-out 1.2s both; }
+  @keyframes draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+  @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
 }
-.sheets { display: grid; gap: 2.5rem; }
+
+.stats {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin: clamp(2.5rem, 6vw, 4rem) 0 0;
+  border-top: 1px solid var(--band-rule);
+}
+@media (min-width: 760px) { .stats { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.stats div { padding: 1.4rem 1rem 1.6rem 0; min-width: 0; }
+@media (min-width: 760px) { .stats div + div { padding-left: 1.25rem; border-left: 1px solid var(--band-rule); } }
+@media (max-width: 759px) { .stats div:nth-child(even) { padding-left: 1rem; border-left: 1px solid var(--band-rule); } .stats div:nth-child(n+3) { border-top: 1px solid var(--band-rule); } }
+.stats dd { margin: 0; font-family: var(--font-display); font-weight: 700; font-stretch: 125%; font-size: clamp(1.9rem, 4.2vw, 2.75rem); line-height: 1; color: var(--band-ink); font-variant-numeric: tabular-nums; }
+.stats dd small { font-size: 0.5em; font-weight: 600; color: var(--band-line); margin-left: 0.12em; }
+.stats dt { margin-top: 0.55rem; font-size: 0.875rem; line-height: 1.4; color: var(--band-soft); }
+.stats div { display: flex; flex-direction: column-reverse; justify-content: flex-end; }
+
+/* ---------- sections ---------- */
+.section { padding-block: clamp(3.5rem, 8vw, 5.5rem) 0; }
+.section-head { display: grid; gap: 0.5rem; margin-bottom: 2.25rem; }
+.section-head .mono-label { color: var(--accent); margin: 0; }
+.section-head h2 {
+  font-family: var(--font-display); font-weight: 700; font-stretch: 112%;
+  font-size: clamp(1.9rem, 4.5vw, 2.75rem); line-height: 1.05; letter-spacing: -0.015em; margin: 0;
+}
+.sheets { display: grid; gap: clamp(2rem, 5vw, 3rem); }
 
 /* ---------- project sheet ---------- */
-.project { background: var(--sheet); border: 1px solid var(--rule); min-width: 0; }
-.project-head { padding: var(--pad); display: grid; gap: 0.9rem; }
-.sheet-no { font-family: var(--font-mono); font-size: 0.75rem; color: var(--ink-soft); letter-spacing: 0.06em; margin: 0; }
-.project h3 {
-  font-family: var(--font-display); font-weight: 600; font-stretch: 112%;
-  font-size: clamp(1.75rem, 4.5vw, 2.6rem); line-height: 1.05; margin: 0; text-wrap: balance;
+.sheet { background: var(--sheet); border: 1px solid var(--rule); box-shadow: 0 24px 48px -36px var(--shadow); min-width: 0; }
+.sheet-head { padding: var(--pad); display: grid; gap: 1.75rem; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 900px) { .sheet-head.has-figs { grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); align-items: end; } }
+.sheet-head > * { min-width: 0; }
+.eyebrow { margin: 0 0 0.75rem; color: var(--accent); }
+.sheet h3 {
+  font-family: var(--font-display); font-weight: 700; font-stretch: 112%;
+  font-size: clamp(1.75rem, 4.2vw, 2.5rem); line-height: 1.05; letter-spacing: -0.015em; margin: 0;
 }
-.project .summary { margin: 0; max-width: var(--measure); font-size: 1.125rem; }
+.sheet .summary { margin: 0.9rem 0 0; max-width: 60ch; font-size: 1.125rem; line-height: 1.6; color: var(--ink-soft); }
 
-/* Title block: the boxed label/value strip from a drawing sheet. */
-.titleblock {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  border-top: 1px solid var(--rule); margin: 0;
-}
-.titleblock div { padding: 0.75rem var(--pad) 0.85rem; border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); min-width: 0; }
+.figs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0; }
+.figs.one { grid-template-columns: minmax(0, 1fr); }
+.figs div { display: flex; flex-direction: column-reverse; justify-content: flex-end; padding: 0 0.9rem; border-left: 1px solid var(--rule); min-width: 0; }
+.figs dd { margin: 0; font-family: var(--font-display); font-weight: 700; font-stretch: 112%; font-size: clamp(1.6rem, 3.4vw, 2.3rem); line-height: 1; color: var(--ink); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.figs dd small { font-size: 0.5em; font-weight: 600; color: var(--accent); margin-left: 0.1em; }
+.figs dt { margin-top: 0.5rem; font-size: 0.8125rem; line-height: 1.35; color: var(--ink-soft); }
+
+/* Title block: the boxed label/value strip along a drawing sheet's edge. */
+.titleblock { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); margin: 0; border-top: 2px solid var(--rule-strong); }
+.titleblock div { padding: 0.7rem var(--pad) 0.8rem; border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); min-width: 0; }
+.titleblock div:last-child { border-right: 0; }
 .titleblock dt { font-family: var(--font-mono); font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-soft); }
 .titleblock dd { margin: 0.15rem 0 0; font-weight: 500; font-size: 0.9375rem; }
+.titleblock .sheetno dd { font-family: var(--font-mono); font-size: 0.875rem; }
 
+/* Figures inside a sheet */
 .shot { margin: 0; border-bottom: 1px solid var(--rule); background: var(--paper); min-width: 0; }
 .shot img { width: 100%; }
 .shot.drawing { background: var(--drawing-bg); }
 .shot.drawing img { padding: clamp(0.5rem, 2vw, 1.25rem); }
-.shot figcaption { font-family: var(--font-mono); font-size: 0.75rem; color: var(--ink-soft); padding: 0.6rem var(--pad); border-top: 1px solid var(--rule); background: var(--sheet); }
+.shot figcaption { font-family: var(--font-mono); font-size: 0.75rem; line-height: 1.5; color: var(--ink-soft); padding: 0.65rem var(--pad); border-top: 1px solid var(--rule); background: var(--sheet); }
 .shots-pair { display: grid; grid-template-columns: minmax(0, 1fr); }
 @media (min-width: 860px) {
   .shots-pair.side { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); }
-  .shots-pair.side .shot + .shot { border-left: 1px solid var(--rule); }
+  .shots-pair.side > * + * { border-left: 1px solid var(--rule); }
   .shots-pair.side .shot { display: flex; flex-direction: column; justify-content: space-between; }
-  .shots-pair.side .shot img { margin-block: auto; }
+  .shots-pair.side .shot img, .shots-pair.side .shot .bdwg { margin-block: auto; }
 }
 
-.project-body {
-  padding: var(--pad);
-  display: grid; gap: 2.5rem; grid-template-columns: minmax(0, 1fr);
-}
-@media (min-width: 860px) { .project-body { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); } }
-.project-body.single { grid-template-columns: minmax(0, 1fr); }
-.project-body > * { min-width: 0; }
-.project-body h4 {
-  font-family: var(--font-mono); font-weight: 500; font-size: 0.75rem; text-transform: uppercase;
-  letter-spacing: 0.1em; color: var(--accent); margin: 0 0 0.6rem;
-}
-.project-body p { margin: 0 0 1.25rem; max-width: var(--measure); }
-.project-body ul { margin: 0 0 1.5rem; padding-left: 1.1rem; }
-.project-body li { margin-bottom: 0.45rem; max-width: var(--measure); }
-.project-body li::marker { color: var(--accent); }
-.notes { display: grid; gap: 1.5rem; align-content: start; }
+/* Results panel beside the bell crank drawing */
+.panel { background: var(--sheet); padding: var(--pad); border-bottom: 1px solid var(--rule); display: grid; gap: 1.75rem; align-content: start; min-width: 0; }
+.panel h4, .body h4 { font-family: var(--font-mono); font-weight: 500; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin: 0 0 0.75rem; }
 
-.stack { display: flex; flex-wrap: wrap; gap: 0.4rem; padding: 0 !important; margin: 0 !important; list-style: none; }
-.stack li { font-family: var(--font-mono); font-size: 0.75rem; padding: 0.2rem 0.55rem; background: var(--accent-wash); color: var(--ink); border-radius: 2px; margin: 0 !important; }
-
-/* Spec table for real numbers (mass, size, torque). */
 .specs { width: 100%; border-collapse: collapse; font-size: 0.9375rem; font-variant-numeric: tabular-nums; }
-.specs th, .specs td { text-align: left; padding: 0.45rem 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
-.specs th { font-weight: 500; color: var(--ink-soft); padding-right: 1rem; width: 45%; }
+.specs th, .specs td { text-align: left; padding: 0.5rem 0.75rem 0.5rem 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+.specs td:last-child, .specs th:last-child { padding-right: 0; }
+.specs tbody th { font-weight: 500; color: var(--ink-soft); }
 .specs td { font-family: var(--font-mono); font-size: 0.875rem; }
+.specs thead th { font-family: var(--font-mono); font-weight: 500; font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-soft); }
+.specs tr.req th, .specs tr.req td { color: var(--accent); border-bottom: 0; }
+.specs.kv th { width: 42%; }
+
+/* Mass-by-iteration bars, drawn to scale (bar length = mass / 38.87 g). */
+.bars { display: grid; gap: 0.7rem; margin: 0; padding: 0; list-style: none; }
+.bars li { display: grid; grid-template-columns: minmax(0, 7.5rem) minmax(0, 1fr); align-items: center; gap: 0.75rem; }
+.bars .lbl { font-size: 0.875rem; color: var(--ink-soft); line-height: 1.3; }
+.bars .track { display: flex; align-items: center; gap: 0.5rem; min-width: 0; }
+.bars .bar { height: 0.85rem; background: var(--accent); border-radius: 0 4px 4px 0; opacity: 0.35; flex: none; }
+.bars li.final .bar { opacity: 1; }
+.bars .val { font-family: var(--font-mono); font-size: 0.8125rem; color: var(--ink); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.bars li.final .val { font-weight: 500; }
+
+/* Sheet body */
+.body { padding: var(--pad); display: grid; gap: 2.5rem; }
+.body > * { min-width: 0; }
+.cols { display: grid; gap: 2.25rem; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 860px) { .cols { grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 3rem; } }
+.cols > * { min-width: 0; }
+.cols.three { }
+@media (min-width: 860px) { .cols.three { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2.25rem; } }
+.body p { margin: 0; max-width: var(--measure); }
+.body p + p { margin-top: 1rem; }
+.body ul.ticks { margin: 0; padding-left: 1.1rem; display: grid; gap: 0.5rem; }
+.body ul.ticks li { max-width: var(--measure); }
+.body ul.ticks li::marker { color: var(--accent); }
+
+/* Numbered method steps (a real sequence, so the numbers carry meaning). */
+.steps { list-style: none; margin: 0; padding: 0; counter-reset: step; display: grid; gap: 0 2.25rem; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 760px) { .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.steps li { counter-increment: step; display: grid; grid-template-columns: 2.25rem minmax(0, 1fr); gap: 0.25rem; padding-block: 1rem; border-top: 1px solid var(--rule); }
+.steps li::before { content: counter(step, decimal-leading-zero); font-family: var(--font-mono); font-size: 0.8125rem; font-weight: 500; color: var(--accent); padding-top: 0.15rem; }
+.steps b { display: block; font-weight: 600; color: var(--ink); }
+.steps span { color: var(--ink-soft); font-size: 0.975rem; }
+
+.callout { border-left: 2px solid var(--accent); padding: 0.2rem 0 0.2rem 1.1rem; }
+.callout p { color: var(--ink-soft); font-size: 0.975rem; }
+.callout b { color: var(--ink); font-weight: 600; }
+
+.stack { display: flex; flex-wrap: wrap; align-items: flex-start; align-content: flex-start; align-self: start; gap: 0.4rem; padding: 0; margin: 0; list-style: none; }
+.stack li { font-family: var(--font-mono); font-size: 0.75rem; padding: 0.25rem 0.6rem; background: var(--accent-wash); color: var(--ink); border-radius: 2px; }
+
+/* Bell crank drawing (sheet) */
+.bdwg { display: block; width: 100%; height: auto; padding: clamp(0.5rem, 2vw, 1.25rem); }
+.b-fill { fill: var(--dwg-fill); stroke: none; }
+.b-part { fill: none; stroke: var(--dwg-ink); stroke-width: 0.4; stroke-linecap: round; }
+.b-hole { fill: none; stroke: var(--dwg-ink); stroke-width: 0.35; }
+.b-cl { fill: none; stroke: var(--dwg-soft); stroke-width: 0.15; stroke-dasharray: 3 0.8 0.6 0.8; }
+.b-dim { fill: none; stroke: var(--dwg-soft); stroke-width: 0.18; }
+.b-head { fill: var(--dwg-soft); }
+.b-txt { font-family: var(--font-mono); font-size: 2.3px; fill: var(--dwg-ink); }
+.b-txt.b-acc { fill: var(--dwg-accent); }
+.b-txt.b-soft { fill: var(--dwg-soft); font-size: 1.9px; }
 
 /* Side-view suspension diagram */
 .diagram { margin: 0; border-bottom: 1px solid var(--rule); background: var(--paper); }
 .diagram .scroll { overflow-x: auto; padding: var(--pad); }
 .diagram svg { display: block; width: 100%; max-width: 760px; margin-inline: auto; min-width: 520px; height: auto; }
-.diagram figcaption { font-family: var(--font-mono); font-size: 0.75rem; color: var(--ink-soft); padding: 0.6rem var(--pad); border-top: 1px solid var(--rule); background: var(--sheet); }
+.diagram figcaption { font-family: var(--font-mono); font-size: 0.75rem; color: var(--ink-soft); padding: 0.65rem var(--pad); border-top: 1px solid var(--rule); background: var(--sheet); }
 .d-ground, .d-body, .d-wheel, .d-arm { stroke: var(--ink); fill: none; }
 .d-ground { stroke-width: 1.5; }
 .d-body { stroke-width: 2; }
@@ -193,116 +312,146 @@ a:hover { text-decoration-thickness: 2px; }
 .d-label { font-family: var(--font-mono); font-size: 13px; fill: var(--ink-soft); }
 .d-label.acc { fill: var(--accent); }
 
-/* Bell crank drawing and results panel. Drawing colors stay dark on the light drawing ground in both themes. */
-.bdwg { display: block; width: 100%; height: auto; padding: clamp(0.5rem, 2vw, 1.25rem); }
-.b-fill { fill: var(--dwg-fill); stroke: none; }
-.b-part { fill: none; stroke: var(--dwg-ink); stroke-width: 0.4; stroke-linecap: round; }
-.b-hole { fill: none; stroke: var(--dwg-ink); stroke-width: 0.35; }
-.b-cl { fill: none; stroke: var(--dwg-soft); stroke-width: 0.15; stroke-dasharray: 3 0.8 0.6 0.8; }
-.b-dim { fill: none; stroke: var(--dwg-soft); stroke-width: 0.18; }
-.b-head { fill: var(--dwg-soft); }
-.b-txt { font-family: var(--font-mono); font-size: 2.3px; fill: var(--dwg-ink); }
-.b-txt.b-acc { fill: var(--dwg-accent); }
-.b-txt.b-soft { fill: var(--dwg-soft); font-size: 1.9px; }
-.shot.results { background: var(--sheet); padding: var(--pad); display: grid; gap: 0.75rem; align-content: start; }
-.shot.results h4 { font-family: var(--font-mono); font-weight: 500; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin: 0.5rem 0 0; }
-.shot.results h4:first-child { margin-top: 0; }
-.results-table th, .results-table td { width: auto; padding-right: 0.75rem; }
-.results-table td:last-child { padding-right: 0; }
-.results-table thead th { font-family: var(--font-mono); font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.08em; }
-.results-table tr.req th, .results-table tr.req td { color: var(--accent); border-bottom: 0; }
-@media (min-width: 860px) {
-  .shots-pair.side .shot.results { justify-content: flex-start; gap: 0.75rem; }
-  .shots-pair.side .shot .bdwg { margin-block: auto; }
-}
-
-/* ---------- experience / leadership ---------- */
-.log { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--rule); }
-.log li { display: grid; gap: 0.25rem 2rem; grid-template-columns: minmax(0, 1fr); padding-block: 1.25rem; border-bottom: 1px solid var(--rule); }
-@media (min-width: 760px) { .log li { grid-template-columns: 13rem minmax(0, 1fr); } }
-.log .when { font-family: var(--font-mono); font-size: 0.8125rem; color: var(--ink-soft); font-variant-numeric: tabular-nums; padding-top: 0.2rem; }
-.log h3 { margin: 0; font-size: 1.0625rem; font-weight: 600; }
-.log .org { color: var(--ink-soft); font-weight: 400; }
-.log ul { margin: 0.4rem 0 0; padding-left: 1.1rem; max-width: var(--measure); }
-.log ul li { display: list-item; padding: 0; border: 0; margin-bottom: 0.25rem; }
-.log ul li::marker { color: var(--accent); }
-.subhead { font-family: var(--font-mono); font-weight: 500; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin: 2.5rem 0 0.75rem; }
-.subhead:first-of-type { margin-top: 0; }
+/* ---------- experience ---------- */
+.exp { display: grid; gap: 3rem; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 860px) { .exp { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+.exp > div { min-width: 0; }
+.exp h3.col-title { margin: 0 0 1.25rem; color: var(--accent); }
+.roles { list-style: none; margin: 0; padding: 0 0 0 1.4rem; border-left: 1px solid var(--rule); display: grid; gap: 1.9rem; }
+.roles > li { position: relative; }
+.roles > li::before { content: ""; position: absolute; left: calc(-1.4rem - 5px); top: 0.45rem; width: 9px; height: 9px; border-radius: 50%; background: var(--paper); border: 2px solid var(--accent); }
+.roles .when { font-family: var(--font-mono); font-size: 0.75rem; color: var(--ink-soft); letter-spacing: 0.04em; margin: 0; font-variant-numeric: tabular-nums; }
+.roles h4 { margin: 0.2rem 0 0; font-size: 1.0625rem; font-weight: 600; line-height: 1.35; }
+.roles .org { margin: 0.1rem 0 0; color: var(--ink-soft); font-size: 0.9375rem; }
+.roles ul { margin: 0.55rem 0 0; padding-left: 1.1rem; display: grid; gap: 0.3rem; font-size: 0.975rem; }
+.roles ul li::marker { color: var(--accent); }
 
 /* ---------- skills ---------- */
-.skills { margin: 0; display: grid; gap: 1.5rem 2.5rem; grid-template-columns: minmax(0, 1fr); }
-@media (min-width: 760px) { .skills { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
-.skills dt { font-family: var(--font-mono); font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-soft); margin-bottom: 0.4rem; }
+.skills { margin: 0; display: grid; gap: 1px; grid-template-columns: minmax(0, 1fr); background: var(--rule); border: 1px solid var(--rule); }
+@media (min-width: 760px) { .skills { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1000px) { .skills { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.skills > div { background: var(--sheet); padding: 1.4rem 1.5rem 1.5rem; min-width: 0; }
+.skills dt { color: var(--accent); margin-bottom: 0.75rem; }
 .skills dd { margin: 0; }
+.skills dd p { margin: 0; font-size: 0.975rem; color: var(--ink-soft); }
 
-/* ---------- contact ---------- */
-.contact { display: grid; gap: 1rem; }
-.contact p { max-width: var(--measure); margin: 0; }
-.contact .big {
-  font-family: var(--font-display); font-weight: 600; font-stretch: 112%;
-  font-size: clamp(1.4rem, 4vw, 2rem); overflow-wrap: anywhere;
-}
-.contact .links { margin-top: 0.25rem; }
-
-footer { margin-top: 3rem; padding-top: 1.25rem; border-top: 1px solid var(--rule); font-family: var(--font-mono); font-size: 0.75rem; color: var(--ink-soft); }
+/* ---------- contact band ---------- */
+.contact { margin-top: clamp(3.5rem, 8vw, 5.5rem); padding-block: clamp(3rem, 8vw, 5rem) 2rem; }
+.contact .mono-label { color: var(--band-line); margin: 0 0 0.75rem; }
+.contact h2 { font-family: var(--font-display); font-weight: 700; font-stretch: 112%; font-size: clamp(2rem, 5vw, 3.25rem); line-height: 1.05; letter-spacing: -0.02em; margin: 0; max-width: 24ch; }
+.contact p.lede { margin: 1.1rem 0 0; color: var(--band-soft); max-width: 52ch; font-size: 1.125rem; }
+.contact .email { display: inline-block; margin: 2rem 0 1.5rem; font-family: var(--font-display); font-weight: 600; font-stretch: 112%; font-size: clamp(1.4rem, 4.2vw, 2.3rem); color: var(--band-ink); text-decoration-color: var(--band-line); text-decoration-thickness: 2px; text-underline-offset: 0.2em; overflow-wrap: anywhere; }
+.contact .email:hover { color: var(--band-line); }
+footer { margin-top: clamp(3rem, 7vw, 4.5rem); padding-top: 1.25rem; border-top: 1px solid var(--band-rule); font-family: var(--font-mono); font-size: 0.75rem; color: var(--band-soft); }
 
 @media print {
-  :root { --paper: #fff; --sheet: #fff; --ink: #000; --ink-soft: #333; --accent: #0b6470; }
-  body { padding: 0; font-size: 11pt; }
-  .topbar nav, .links { display: none; }
-  .project, .shot, .log li { break-inside: avoid; }
+  .nav { position: static; }
+  .band { background: #fff; color: #000; }
+  .sheet, .shot, .roles > li { break-inside: avoid; }
 }
 </style>
 </head>
 <body>
-<div class="wrap">
 
-  <header class="topbar">
+<header class="nav">
+  <div class="wrap">
     <a class="mark" href="#top">Brady Sifert</a>
     <nav aria-label="Sections">
       <a href="#projects">Projects</a>
       <a href="#experience">Experience</a>
       <a href="#skills">Skills</a>
-      <a class="cta" href="#contact">Contact</a>
+      <a class="nav-cta" href="#contact">Contact</a>
     </nav>
-  </header>
+  </div>
+</header>
 
-  <main id="top">
-    <section class="hero">
-      <p class="status">Seeking a Summer 2027 mechanical engineering internship</p>
-      <h1>Brady Sifert</h1>
-      <p class="role">Mechanical Engineering, University of Maryland</p>
-      <p class="lede">Sophomore in the A. James Clark School of Engineering. I design parts in CAD, analyze them with FEA, and build and test them. Recent work includes a 77%-lighter titanium bell crank, suspension geometry for a Formula SAE team, and an autonomous robot I led from CAD to fabrication. Interested in vehicle, aerospace, energy and mechanical design roles.</p>
-      <ul class="links">
-        <li><a class="btn primary" href="mailto:brady.sifert@gmail.com">Email me</a></li>
-        <li><a class="btn" href="https://www.linkedin.com/in/bradysifert">LinkedIn ↗</a></li>
-        <li><a class="btn" href="#projects">View projects ↓</a></li>
-      </ul>
-      <dl class="titleblock">
-        <div><dt>Degree</dt><dd>B.S. Mechanical Engineering</dd></div>
-        <div><dt>Graduation</dt><dd>May 2029</dd></div>
-        <div><dt>GPA</dt><dd>3.34</dd></div>
-        <div><dt>CAD</dt><dd>SolidWorks, Onshape</dd></div>
+<main id="top">
+
+  <!-- ===== Hero ===== -->
+  <section class="hero band">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="status">Seeking a Summer 2027 mechanical engineering internship</p>
+        <h1>Brady Sifert</h1>
+        <p class="role">Mechanical Engineering, University of Maryland</p>
+        <p class="facts"><span>B.S. expected May 2029</span><span>GPA 3.34</span><span>SolidWorks · Onshape</span></p>
+        <p class="lede">I design parts in CAD, prove them with FEA, then build and test them. On <strong>Terps Racing</strong> I took a titanium suspension bell crank from 38.87 g to <strong>8.85 g</strong> without missing a requirement. I also led an 8-person team from CAD to a working autonomous robot.</p>
+        <ul class="links">
+          <li><a class="btn primary" href="mailto:brady.sifert@gmail.com">Email me</a></li>
+          <li><a class="btn" href="https://www.linkedin.com/in/bradysifert">LinkedIn ↗</a></li>
+          <li><a class="btn" href="#projects">See projects ↓</a></li>
+        </ul>
+      </div>
+      <figure class="hero-fig">
+        <svg viewBox="-20 -61 86 80" role="img" aria-labelledby="hf-title">
+          <title id="hf-title">Outline of the 8.85 g titanium bell crank, with hole spacing of 43.29 mm and 49.03 mm</title>
+          <defs>
+            <marker id="hf-arrow" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="2.2" markerHeight="2.2" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path class="h-head" d="M0 1.5L10 5L0 8.5Z"/></marker>
+          </defs>
+          <path class="h-fill" fill-rule="evenodd" d="M5.18 2.86L36.38 3.73L36.48 3.73L36.58 3.75L36.68 3.76L36.78 3.78L36.88 3.81L36.98 3.84L37.08 3.88L37.17 3.93L37.26 3.97L37.35 4.03L37.43 4.08L37.51 4.15L37.59 4.21L37.67 4.28L37.74 4.36L37.80 4.43L38.04 4.72L38.30 4.98L38.57 5.24L38.85 5.48L39.14 5.70L39.44 5.91L39.76 6.11L40.08 6.28L40.42 6.44L40.76 6.59L41.11 6.71L41.46 6.81L41.82 6.90L42.18 6.97L42.55 7.02L42.92 7.05L43.29 7.06L43.66 7.05L44.03 7.02L44.39 6.97L44.76 6.90L45.12 6.82L45.47 6.71L45.82 6.59L46.16 6.45L46.49 6.29L46.82 6.11L47.13 5.92L47.44 5.71L47.73 5.49L48.01 5.25L48.28 4.99L48.54 4.72L48.78 4.44L49.00 4.15L49.21 3.84L49.40 3.53L49.58 3.20L49.74 2.87L49.88 2.53L50.00 2.18L50.11 1.83L50.20 1.47L50.26 1.10L50.31 0.74L50.34 0.37L50.35 0.00L50.34 -0.37L50.31 -0.74L50.26 -1.11L50.19 -1.48L50.11 -1.84L50.00 -2.20L49.87 -2.55L49.73 -2.89L49.57 -3.23L49.39 -3.55L49.19 -3.87L48.98 -4.18L48.75 -4.47L48.51 -4.75L48.25 -5.02L47.98 -5.27L47.70 -5.51L47.40 -5.74L47.09 -5.95L46.77 -6.14L46.44 -6.31L46.10 -6.47L45.76 -6.61L45.41 -6.73L45.05 -6.83L44.69 -6.92L44.32 -6.98L43.95 -7.03L43.58 -7.05L43.21 -7.06L42.83 -7.04L42.73 -7.04L42.63 -7.04L42.53 -7.05L42.43 -7.06L42.33 -7.08L42.23 -7.10L42.14 -7.13L42.04 -7.16L41.95 -7.20L41.86 -7.24L41.77 -7.29L41.68 -7.34L41.60 -7.40L41.52 -7.46L41.44 -7.52L41.37 -7.59L41.30 -7.67L41.23 -7.74L41.17 -7.82L41.11 -7.91L18.23 -43.37L18.07 -43.62L17.93 -43.89L17.80 -44.17L17.69 -44.45L17.59 -44.73L17.51 -45.03L17.45 -45.32L17.40 -45.62L17.37 -45.92L17.35 -46.22L17.35 -46.53L17.37 -46.83L17.40 -47.13L17.46 -47.43L17.52 -47.72L17.59 -48.05L17.65 -48.37L17.68 -48.70L17.69 -49.03L17.68 -49.30L17.66 -49.58L17.62 -49.85L17.57 -50.13L17.50 -50.40L17.43 -50.66L17.33 -50.92L17.22 -51.18L17.10 -51.43L16.97 -51.67L16.82 -51.91L16.67 -52.13L16.50 -52.35L16.32 -52.56L16.12 -52.76L15.92 -52.95L15.71 -53.13L15.49 -53.30L15.26 -53.45L15.02 -53.59L14.77 -53.72L14.52 -53.84L14.27 -53.94L14.00 -54.03L13.74 -54.11L13.47 -54.17L13.19 -54.22L12.92 -54.25L12.64 -54.27L12.36 -54.27L12.09 -54.26L11.81 -54.23L11.54 -54.19L11.27 -54.14L11.00 -54.07L10.73 -53.98L10.47 -53.89L10.22 -53.78L9.97 -53.65L9.73 -53.52L9.50 -53.37L9.27 -53.20L9.06 -53.03L8.85 -52.85L8.65 -52.65L8.47 -52.45L8.29 -52.23L8.13 -52.01L7.98 -51.78L7.84 -51.54L7.71 -51.29L7.60 -51.04L7.50 -50.78L7.41 -50.51L7.34 -50.25L7.28 -49.97L7.24 -49.70L7.21 -49.42L7.20 -49.15L7.20 -48.87L7.22 -48.59L7.25 -48.32L7.29 -48.05L7.35 -47.77L7.42 -47.51L7.51 -47.24L7.61 -46.99L7.73 -46.73L7.85 -46.49L7.99 -46.25L8.14 -45.99L8.28 -45.73L8.40 -45.46L8.51 -45.18L8.60 -44.90L8.68 -44.61L8.74 -44.32L8.79 -44.03L8.82 -43.73L8.83 -43.44L8.83 -43.14L8.81 -42.84L8.78 -42.55L8.73 -42.26L8.66 -41.97L-0.44 -6.30L-0.49 -6.13L-0.55 -5.96L-0.61 -5.80L-0.69 -5.64L-0.77 -5.48L-0.86 -5.33L-0.96 -5.18L-1.07 -5.04L-1.18 -4.91L-1.30 -4.78L-1.43 -4.66L-1.56 -4.54L-1.70 -4.43L-1.84 -4.33L-1.99 -4.24L-2.15 -4.15L-2.37 -4.03L-2.58 -3.90L-2.78 -3.76L-2.98 -3.60L-3.16 -3.44L-3.34 -3.27L-3.51 -3.09L-3.67 -2.89L-3.82 -2.70L-3.96 -2.49L-4.08 -2.27L-4.20 -2.05L-4.30 -1.83L-4.39 -1.60L-4.47 -1.36L-4.54 -1.12L-4.59 -0.88L-4.63 -0.63L-4.66 -0.39L-4.67 -0.14L-4.67 0.11L-4.66 0.36L-4.64 0.61L-4.60 0.85L-4.54 1.10L-4.48 1.34L-4.40 1.57L-4.31 1.80L-4.21 2.03L-4.10 2.25L-3.97 2.47L-3.84 2.67L-3.69 2.87L-3.53 3.07L-3.36 3.25L-3.18 3.42L-3.00 3.59L-2.80 3.74L-2.60 3.89L-2.39 4.02L-2.17 4.14L-1.95 4.25L-1.72 4.35L-1.49 4.43L-1.25 4.50L-1.01 4.56L-0.76 4.61L-0.52 4.65L-0.27 4.67L-0.02 4.67L0.23 4.67L0.47 4.65L0.72 4.62L0.97 4.57L1.21 4.52L1.45 4.45L1.68 4.36L1.91 4.27L2.13 4.16L2.35 4.04L2.56 3.91L2.77 3.77L2.96 3.62L3.11 3.50L3.26 3.40L3.42 3.30L3.58 3.21L3.75 3.14L3.92 3.07L4.09 3.01L4.27 2.96L4.45 2.92L4.63 2.89L4.81 2.87L5.00 2.86ZM3.22 -6.81L3.16 -6.55L3.12 -6.28L3.08 -6.01L3.07 -5.74L3.06 -5.47L3.08 -5.20L3.10 -4.93L3.14 -4.67L3.20 -4.40L3.26 -4.14L3.35 -3.88L3.44 -3.63L3.55 -3.38L3.67 -3.14L3.80 -2.90L3.95 -2.67L4.11 -2.45L4.28 -2.24L4.46 -2.04L4.65 -1.85L4.85 -1.67L5.06 -1.50L5.28 -1.34L5.50 -1.19L5.74 -1.05L5.98 -0.93L6.23 -0.82L6.48 -0.72L6.74 -0.64L7.00 -0.57L7.26 -0.51L7.53 -0.47L7.80 -0.44L8.07 -0.43L8.34 -0.43L25.88 -0.92L26.34 -0.94L26.80 -0.99L27.25 -1.07L27.70 -1.16L28.14 -1.29L28.58 -1.43L29.01 -1.60L29.43 -1.79L29.83 -2.01L30.23 -2.24L30.61 -2.50L30.98 -2.78L31.33 -3.07L31.67 -3.39L31.99 -3.72L32.29 -4.07L32.57 -4.43L32.83 -4.81L33.07 -5.20L33.29 -5.61L33.48 -6.02L33.66 -6.45L33.81 -6.88L33.94 -7.33L34.04 -7.77L34.12 -8.23L34.18 -8.68L34.21 -9.14L34.21 -9.60L34.20 -10.06L34.15 -10.52L34.08 -10.98L33.99 -11.43L33.88 -11.87L33.74 -12.31L33.57 -12.74L33.39 -13.16L33.18 -13.57L32.95 -13.97L16.27 -41.16L16.20 -41.27L16.12 -41.38L16.04 -41.48L15.95 -41.58L15.85 -41.67L15.75 -41.76L15.65 -41.84L15.54 -41.92L15.43 -41.99L15.31 -42.06L15.19 -42.12L15.07 -42.17L14.94 -42.22L14.82 -42.26L14.69 -42.29L14.56 -42.32L14.42 -42.34L14.29 -42.35L14.16 -42.35L14.03 -42.35L13.89 -42.34L13.76 -42.32L13.63 -42.30L13.50 -42.27L13.37 -42.23L13.25 -42.19L13.12 -42.14L13.00 -42.08L12.88 -42.02L12.77 -41.95L12.66 -41.87L12.56 -41.79L12.45 -41.70L12.36 -41.61L12.27 -41.51L12.18 -41.41L12.10 -41.30L12.03 -41.19L11.96 -41.08L11.90 -40.96L11.84 -40.84L11.79 -40.72L11.75 -40.59L11.71 -40.46ZM-3.175 -0.000a3.175 3.175 0 1 0 6.350 0a3.175 3.175 0 1 0 -6.350 0ZM9.267 -49.026a3.175 3.175 0 1 0 6.350 0a3.175 3.175 0 1 0 -6.350 0ZM37.737 -0.000a5.556 5.556 0 1 0 11.113 0a5.556 5.556 0 1 0 -11.113 0Z"/>
+          <path class="h-line" pathLength="1" d="M5.18 2.86L36.38 3.73L36.48 3.73L36.58 3.75L36.68 3.76L36.78 3.78L36.88 3.81L36.98 3.84L37.08 3.88L37.17 3.93L37.26 3.97L37.35 4.03L37.43 4.08L37.51 4.15L37.59 4.21L37.67 4.28L37.74 4.36L37.80 4.43L38.04 4.72L38.30 4.98L38.57 5.24L38.85 5.48L39.14 5.70L39.44 5.91L39.76 6.11L40.08 6.28L40.42 6.44L40.76 6.59L41.11 6.71L41.46 6.81L41.82 6.90L42.18 6.97L42.55 7.02L42.92 7.05L43.29 7.06L43.66 7.05L44.03 7.02L44.39 6.97L44.76 6.90L45.12 6.82L45.47 6.71L45.82 6.59L46.16 6.45L46.49 6.29L46.82 6.11L47.13 5.92L47.44 5.71L47.73 5.49L48.01 5.25L48.28 4.99L48.54 4.72L48.78 4.44L49.00 4.15L49.21 3.84L49.40 3.53L49.58 3.20L49.74 2.87L49.88 2.53L50.00 2.18L50.11 1.83L50.20 1.47L50.26 1.10L50.31 0.74L50.34 0.37L50.35 0.00L50.34 -0.37L50.31 -0.74L50.26 -1.11L50.19 -1.48L50.11 -1.84L50.00 -2.20L49.87 -2.55L49.73 -2.89L49.57 -3.23L49.39 -3.55L49.19 -3.87L48.98 -4.18L48.75 -4.47L48.51 -4.75L48.25 -5.02L47.98 -5.27L47.70 -5.51L47.40 -5.74L47.09 -5.95L46.77 -6.14L46.44 -6.31L46.10 -6.47L45.76 -6.61L45.41 -6.73L45.05 -6.83L44.69 -6.92L44.32 -6.98L43.95 -7.03L43.58 -7.05L43.21 -7.06L42.83 -7.04L42.73 -7.04L42.63 -7.04L42.53 -7.05L42.43 -7.06L42.33 -7.08L42.23 -7.10L42.14 -7.13L42.04 -7.16L41.95 -7.20L41.86 -7.24L41.77 -7.29L41.68 -7.34L41.60 -7.40L41.52 -7.46L41.44 -7.52L41.37 -7.59L41.30 -7.67L41.23 -7.74L41.17 -7.82L41.11 -7.91L18.23 -43.37L18.07 -43.62L17.93 -43.89L17.80 -44.17L17.69 -44.45L17.59 -44.73L17.51 -45.03L17.45 -45.32L17.40 -45.62L17.37 -45.92L17.35 -46.22L17.35 -46.53L17.37 -46.83L17.40 -47.13L17.46 -47.43L17.52 -47.72L17.59 -48.05L17.65 -48.37L17.68 -48.70L17.69 -49.03L17.68 -49.30L17.66 -49.58L17.62 -49.85L17.57 -50.13L17.50 -50.40L17.43 -50.66L17.33 -50.92L17.22 -51.18L17.10 -51.43L16.97 -51.67L16.82 -51.91L16.67 -52.13L16.50 -52.35L16.32 -52.56L16.12 -52.76L15.92 -52.95L15.71 -53.13L15.49 -53.30L15.26 -53.45L15.02 -53.59L14.77 -53.72L14.52 -53.84L14.27 -53.94L14.00 -54.03L13.74 -54.11L13.47 -54.17L13.19 -54.22L12.92 -54.25L12.64 -54.27L12.36 -54.27L12.09 -54.26L11.81 -54.23L11.54 -54.19L11.27 -54.14L11.00 -54.07L10.73 -53.98L10.47 -53.89L10.22 -53.78L9.97 -53.65L9.73 -53.52L9.50 -53.37L9.27 -53.20L9.06 -53.03L8.85 -52.85L8.65 -52.65L8.47 -52.45L8.29 -52.23L8.13 -52.01L7.98 -51.78L7.84 -51.54L7.71 -51.29L7.60 -51.04L7.50 -50.78L7.41 -50.51L7.34 -50.25L7.28 -49.97L7.24 -49.70L7.21 -49.42L7.20 -49.15L7.20 -48.87L7.22 -48.59L7.25 -48.32L7.29 -48.05L7.35 -47.77L7.42 -47.51L7.51 -47.24L7.61 -46.99L7.73 -46.73L7.85 -46.49L7.99 -46.25L8.14 -45.99L8.28 -45.73L8.40 -45.46L8.51 -45.18L8.60 -44.90L8.68 -44.61L8.74 -44.32L8.79 -44.03L8.82 -43.73L8.83 -43.44L8.83 -43.14L8.81 -42.84L8.78 -42.55L8.73 -42.26L8.66 -41.97L-0.44 -6.30L-0.49 -6.13L-0.55 -5.96L-0.61 -5.80L-0.69 -5.64L-0.77 -5.48L-0.86 -5.33L-0.96 -5.18L-1.07 -5.04L-1.18 -4.91L-1.30 -4.78L-1.43 -4.66L-1.56 -4.54L-1.70 -4.43L-1.84 -4.33L-1.99 -4.24L-2.15 -4.15L-2.37 -4.03L-2.58 -3.90L-2.78 -3.76L-2.98 -3.60L-3.16 -3.44L-3.34 -3.27L-3.51 -3.09L-3.67 -2.89L-3.82 -2.70L-3.96 -2.49L-4.08 -2.27L-4.20 -2.05L-4.30 -1.83L-4.39 -1.60L-4.47 -1.36L-4.54 -1.12L-4.59 -0.88L-4.63 -0.63L-4.66 -0.39L-4.67 -0.14L-4.67 0.11L-4.66 0.36L-4.64 0.61L-4.60 0.85L-4.54 1.10L-4.48 1.34L-4.40 1.57L-4.31 1.80L-4.21 2.03L-4.10 2.25L-3.97 2.47L-3.84 2.67L-3.69 2.87L-3.53 3.07L-3.36 3.25L-3.18 3.42L-3.00 3.59L-2.80 3.74L-2.60 3.89L-2.39 4.02L-2.17 4.14L-1.95 4.25L-1.72 4.35L-1.49 4.43L-1.25 4.50L-1.01 4.56L-0.76 4.61L-0.52 4.65L-0.27 4.67L-0.02 4.67L0.23 4.67L0.47 4.65L0.72 4.62L0.97 4.57L1.21 4.52L1.45 4.45L1.68 4.36L1.91 4.27L2.13 4.16L2.35 4.04L2.56 3.91L2.77 3.77L2.96 3.62L3.11 3.50L3.26 3.40L3.42 3.30L3.58 3.21L3.75 3.14L3.92 3.07L4.09 3.01L4.27 2.96L4.45 2.92L4.63 2.89L4.81 2.87L5.00 2.86Z"/>
+          <path class="h-line" pathLength="1" d="M3.22 -6.81L3.16 -6.55L3.12 -6.28L3.08 -6.01L3.07 -5.74L3.06 -5.47L3.08 -5.20L3.10 -4.93L3.14 -4.67L3.20 -4.40L3.26 -4.14L3.35 -3.88L3.44 -3.63L3.55 -3.38L3.67 -3.14L3.80 -2.90L3.95 -2.67L4.11 -2.45L4.28 -2.24L4.46 -2.04L4.65 -1.85L4.85 -1.67L5.06 -1.50L5.28 -1.34L5.50 -1.19L5.74 -1.05L5.98 -0.93L6.23 -0.82L6.48 -0.72L6.74 -0.64L7.00 -0.57L7.26 -0.51L7.53 -0.47L7.80 -0.44L8.07 -0.43L8.34 -0.43L25.88 -0.92L26.34 -0.94L26.80 -0.99L27.25 -1.07L27.70 -1.16L28.14 -1.29L28.58 -1.43L29.01 -1.60L29.43 -1.79L29.83 -2.01L30.23 -2.24L30.61 -2.50L30.98 -2.78L31.33 -3.07L31.67 -3.39L31.99 -3.72L32.29 -4.07L32.57 -4.43L32.83 -4.81L33.07 -5.20L33.29 -5.61L33.48 -6.02L33.66 -6.45L33.81 -6.88L33.94 -7.33L34.04 -7.77L34.12 -8.23L34.18 -8.68L34.21 -9.14L34.21 -9.60L34.20 -10.06L34.15 -10.52L34.08 -10.98L33.99 -11.43L33.88 -11.87L33.74 -12.31L33.57 -12.74L33.39 -13.16L33.18 -13.57L32.95 -13.97L16.27 -41.16L16.20 -41.27L16.12 -41.38L16.04 -41.48L15.95 -41.58L15.85 -41.67L15.75 -41.76L15.65 -41.84L15.54 -41.92L15.43 -41.99L15.31 -42.06L15.19 -42.12L15.07 -42.17L14.94 -42.22L14.82 -42.26L14.69 -42.29L14.56 -42.32L14.42 -42.34L14.29 -42.35L14.16 -42.35L14.03 -42.35L13.89 -42.34L13.76 -42.32L13.63 -42.30L13.50 -42.27L13.37 -42.23L13.25 -42.19L13.12 -42.14L13.00 -42.08L12.88 -42.02L12.77 -41.95L12.66 -41.87L12.56 -41.79L12.45 -41.70L12.36 -41.61L12.27 -41.51L12.18 -41.41L12.10 -41.30L12.03 -41.19L11.96 -41.08L11.90 -40.96L11.84 -40.84L11.79 -40.72L11.75 -40.59L11.71 -40.46Z"/>
+          <circle class="h-line h-hole" pathLength="1" cx="0.000" cy="-0.000" r="3.175"/>
+          <circle class="h-line h-hole" pathLength="1" cx="12.442" cy="-49.026" r="3.175"/>
+          <circle class="h-line h-hole" pathLength="1" cx="43.293" cy="-0.000" r="5.556"/>
+          <g class="h-anno">
+            <path class="h-cl" d="M-5.5 0H5.5M0 -5.5V5.5M6.9 -49.026H18M12.442 -54.6V-43.5M36 0H50.6M43.293 -7.3V7.3"/>
+            <path class="h-dim" d="M0 6V15M43.293 8.2V15"/>
+            <line class="h-dim" x1="0" y1="13.5" x2="43.293" y2="13.5" marker-start="url(#hf-arrow)" marker-end="url(#hf-arrow)"/>
+            <text class="h-txt" x="21.65" y="12.3" text-anchor="middle">43.29</text>
+            <path class="h-dim" d="M-6 0H-15M6.4 -49.026H-15"/>
+            <line class="h-dim" x1="-13.5" y1="0" x2="-13.5" y2="-49.026" marker-start="url(#hf-arrow)" marker-end="url(#hf-arrow)"/>
+            <text class="h-txt" x="-14.6" y="-24.5" text-anchor="middle" transform="rotate(-90 -14.6 -24.5)">49.03</text>
+            <path class="h-dim" d="M47.22 -3.93L52.5 -12H54"/>
+            <text class="h-txt lead" x="54.6" y="-13.2">PIVOT</text>
+            <text class="h-txt" x="54.6" y="-10">Ø11.11</text>
+            <path class="h-dim" d="M20.5 -36.5L28 -42H29.5"/>
+            <text class="h-txt lead" x="30.1" y="-43.2">8.85 g</text>
+            <text class="h-txt" x="30.1" y="-40">Ti-5Al-2.5Sn</text>
+          </g>
+        </svg>
+        <figcaption><b>Fig. 1</b> · Terps Racing bell crank, final profile (mm)</figcaption>
+      </figure>
+    </div>
+    <div class="wrap">
+      <dl class="stats">
+        <div><dt>lighter bell crank than the starting blank</dt><dd>77<small>%</small></dd></div>
+        <div><dt>factor of safety, against 1.75 required</dt><dd>1.76</dd></div>
+        <div><dt>person robotics team led, CAD to build</dt><dd>8</dd></div>
+        <div><dt>held by my balsa truss bridge, a school record</dt><dd>300+<small>lb</small></dd></div>
       </dl>
-    </section>
+    </div>
+  </section>
 
-    <section class="section" id="projects">
-      <h2>Engineering projects</h2>
+  <!-- ===== Projects ===== -->
+  <section class="section" id="projects">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="mono-label">Selected work</p>
+        <h2>Engineering projects</h2>
+      </div>
       <div class="sheets">
 
-      <!-- ===== Sheet 1: Bell crank ===== -->
-      <article class="project" aria-labelledby="p-bellcrank">
-        <div class="project-head">
-          <p class="sheet-no">SHEET 1 OF 4 · 2026</p>
-          <h3 id="p-bellcrank">Minimum-Mass Titanium Bell Crank</h3>
-          <p class="summary">Designed a suspension bell crank for a mass-reduction design challenge. Cut the part from a 38.87 g blank to 8.85 g (77% lighter) in 0.125 in Ti-5Al-2.5Sn, while meeting every strength, stiffness and buckling requirement.</p>
+      <!-- Sheet 1: Bell crank -->
+      <article class="sheet" aria-labelledby="p-bellcrank">
+        <div class="sheet-head has-figs">
+          <div>
+            <p class="eyebrow mono-label">Terps Racing · Formula SAE · 2026</p>
+            <h3 id="p-bellcrank">Minimum-Mass Titanium Bell Crank</h3>
+            <p class="summary">Designed a suspension bell crank for a Terps Racing mass-reduction challenge. Took it from a 38.87 g blank to 8.85 g in 0.125 in titanium while meeting every strength, stiffness and buckling requirement.</p>
+          </div>
+          <dl class="figs">
+            <div><dt>final mass</dt><dd>8.85<small>g</small></dd></div>
+            <div><dt>lighter than blank</dt><dd>77<small>%</small></dd></div>
+            <div><dt>min. factor of safety</dt><dd>1.76</dd></div>
+          </dl>
         </div>
 
         <dl class="titleblock">
-          <div><dt>Final mass</dt><dd>8.85 g (blank 38.87 g)</dd></div>
-          <div><dt>Material</dt><dd>Ti-5Al-2.5Sn, 0.125 in plate</dd></div>
+          <div><dt>Material</dt><dd>Ti-5Al-2.5Sn, 0.125 in</dd></div>
           <div><dt>Process</dt><dd>Waterjet cut</dd></div>
-          <div><dt>Tools</dt><dd>SolidWorks Simulation, Python FEA</dd></div>
+          <div><dt>Tools</dt><dd>SolidWorks Simulation, Python</dd></div>
+          <div class="sheetno"><dt>Sheet</dt><dd>1 of 4</dd></div>
         </dl>
 
         <div class="shots-pair side">
@@ -318,17 +467,13 @@ footer { margin-top: 3rem; padding-top: 1.25rem; border-top: 1px solid var(--rul
               <circle class="b-hole" cx="12.442" cy="-49.026" r="3.175"/>
               <circle class="b-hole" cx="43.293" cy="-0" r="5.556"/>
               <path class="b-fill" fill-rule="evenodd" d="M5.18 2.86L36.38 3.73L36.48 3.73L36.58 3.75L36.68 3.76L36.78 3.78L36.88 3.81L36.98 3.84L37.08 3.88L37.17 3.93L37.26 3.97L37.35 4.03L37.43 4.08L37.51 4.15L37.59 4.21L37.67 4.28L37.74 4.36L37.80 4.43L38.04 4.72L38.30 4.98L38.57 5.24L38.85 5.48L39.14 5.70L39.44 5.91L39.76 6.11L40.08 6.28L40.42 6.44L40.76 6.59L41.11 6.71L41.46 6.81L41.82 6.90L42.18 6.97L42.55 7.02L42.92 7.05L43.29 7.06L43.66 7.05L44.03 7.02L44.39 6.97L44.76 6.90L45.12 6.82L45.47 6.71L45.82 6.59L46.16 6.45L46.49 6.29L46.82 6.11L47.13 5.92L47.44 5.71L47.73 5.49L48.01 5.25L48.28 4.99L48.54 4.72L48.78 4.44L49.00 4.15L49.21 3.84L49.40 3.53L49.58 3.20L49.74 2.87L49.88 2.53L50.00 2.18L50.11 1.83L50.20 1.47L50.26 1.10L50.31 0.74L50.34 0.37L50.35 0.00L50.34 -0.37L50.31 -0.74L50.26 -1.11L50.19 -1.48L50.11 -1.84L50.00 -2.20L49.87 -2.55L49.73 -2.89L49.57 -3.23L49.39 -3.55L49.19 -3.87L48.98 -4.18L48.75 -4.47L48.51 -4.75L48.25 -5.02L47.98 -5.27L47.70 -5.51L47.40 -5.74L47.09 -5.95L46.77 -6.14L46.44 -6.31L46.10 -6.47L45.76 -6.61L45.41 -6.73L45.05 -6.83L44.69 -6.92L44.32 -6.98L43.95 -7.03L43.58 -7.05L43.21 -7.06L42.83 -7.04L42.73 -7.04L42.63 -7.04L42.53 -7.05L42.43 -7.06L42.33 -7.08L42.23 -7.10L42.14 -7.13L42.04 -7.16L41.95 -7.20L41.86 -7.24L41.77 -7.29L41.68 -7.34L41.60 -7.40L41.52 -7.46L41.44 -7.52L41.37 -7.59L41.30 -7.67L41.23 -7.74L41.17 -7.82L41.11 -7.91L18.23 -43.37L18.07 -43.62L17.93 -43.89L17.80 -44.17L17.69 -44.45L17.59 -44.73L17.51 -45.03L17.45 -45.32L17.40 -45.62L17.37 -45.92L17.35 -46.22L17.35 -46.53L17.37 -46.83L17.40 -47.13L17.46 -47.43L17.52 -47.72L17.59 -48.05L17.65 -48.37L17.68 -48.70L17.69 -49.03L17.68 -49.30L17.66 -49.58L17.62 -49.85L17.57 -50.13L17.50 -50.40L17.43 -50.66L17.33 -50.92L17.22 -51.18L17.10 -51.43L16.97 -51.67L16.82 -51.91L16.67 -52.13L16.50 -52.35L16.32 -52.56L16.12 -52.76L15.92 -52.95L15.71 -53.13L15.49 -53.30L15.26 -53.45L15.02 -53.59L14.77 -53.72L14.52 -53.84L14.27 -53.94L14.00 -54.03L13.74 -54.11L13.47 -54.17L13.19 -54.22L12.92 -54.25L12.64 -54.27L12.36 -54.27L12.09 -54.26L11.81 -54.23L11.54 -54.19L11.27 -54.14L11.00 -54.07L10.73 -53.98L10.47 -53.89L10.22 -53.78L9.97 -53.65L9.73 -53.52L9.50 -53.37L9.27 -53.20L9.06 -53.03L8.85 -52.85L8.65 -52.65L8.47 -52.45L8.29 -52.23L8.13 -52.01L7.98 -51.78L7.84 -51.54L7.71 -51.29L7.60 -51.04L7.50 -50.78L7.41 -50.51L7.34 -50.25L7.28 -49.97L7.24 -49.70L7.21 -49.42L7.20 -49.15L7.20 -48.87L7.22 -48.59L7.25 -48.32L7.29 -48.05L7.35 -47.77L7.42 -47.51L7.51 -47.24L7.61 -46.99L7.73 -46.73L7.85 -46.49L7.99 -46.25L8.14 -45.99L8.28 -45.73L8.40 -45.46L8.51 -45.18L8.60 -44.90L8.68 -44.61L8.74 -44.32L8.79 -44.03L8.82 -43.73L8.83 -43.44L8.83 -43.14L8.81 -42.84L8.78 -42.55L8.73 -42.26L8.66 -41.97L-0.44 -6.30L-0.49 -6.13L-0.55 -5.96L-0.61 -5.80L-0.69 -5.64L-0.77 -5.48L-0.86 -5.33L-0.96 -5.18L-1.07 -5.04L-1.18 -4.91L-1.30 -4.78L-1.43 -4.66L-1.56 -4.54L-1.70 -4.43L-1.84 -4.33L-1.99 -4.24L-2.15 -4.15L-2.37 -4.03L-2.58 -3.90L-2.78 -3.76L-2.98 -3.60L-3.16 -3.44L-3.34 -3.27L-3.51 -3.09L-3.67 -2.89L-3.82 -2.70L-3.96 -2.49L-4.08 -2.27L-4.20 -2.05L-4.30 -1.83L-4.39 -1.60L-4.47 -1.36L-4.54 -1.12L-4.59 -0.88L-4.63 -0.63L-4.66 -0.39L-4.67 -0.14L-4.67 0.11L-4.66 0.36L-4.64 0.61L-4.60 0.85L-4.54 1.10L-4.48 1.34L-4.40 1.57L-4.31 1.80L-4.21 2.03L-4.10 2.25L-3.97 2.47L-3.84 2.67L-3.69 2.87L-3.53 3.07L-3.36 3.25L-3.18 3.42L-3.00 3.59L-2.80 3.74L-2.60 3.89L-2.39 4.02L-2.17 4.14L-1.95 4.25L-1.72 4.35L-1.49 4.43L-1.25 4.50L-1.01 4.56L-0.76 4.61L-0.52 4.65L-0.27 4.67L-0.02 4.67L0.23 4.67L0.47 4.65L0.72 4.62L0.97 4.57L1.21 4.52L1.45 4.45L1.68 4.36L1.91 4.27L2.13 4.16L2.35 4.04L2.56 3.91L2.77 3.77L2.96 3.62L3.11 3.50L3.26 3.40L3.42 3.30L3.58 3.21L3.75 3.14L3.92 3.07L4.09 3.01L4.27 2.96L4.45 2.92L4.63 2.89L4.81 2.87L5.00 2.86ZM3.22 -6.81L3.16 -6.55L3.12 -6.28L3.08 -6.01L3.07 -5.74L3.06 -5.47L3.08 -5.20L3.10 -4.93L3.14 -4.67L3.20 -4.40L3.26 -4.14L3.35 -3.88L3.44 -3.63L3.55 -3.38L3.67 -3.14L3.80 -2.90L3.95 -2.67L4.11 -2.45L4.28 -2.24L4.46 -2.04L4.65 -1.85L4.85 -1.67L5.06 -1.50L5.28 -1.34L5.50 -1.19L5.74 -1.05L5.98 -0.93L6.23 -0.82L6.48 -0.72L6.74 -0.64L7.00 -0.57L7.26 -0.51L7.53 -0.47L7.80 -0.44L8.07 -0.43L8.34 -0.43L25.88 -0.92L26.34 -0.94L26.80 -0.99L27.25 -1.07L27.70 -1.16L28.14 -1.29L28.58 -1.43L29.01 -1.60L29.43 -1.79L29.83 -2.01L30.23 -2.24L30.61 -2.50L30.98 -2.78L31.33 -3.07L31.67 -3.39L31.99 -3.72L32.29 -4.07L32.57 -4.43L32.83 -4.81L33.07 -5.20L33.29 -5.61L33.48 -6.02L33.66 -6.45L33.81 -6.88L33.94 -7.33L34.04 -7.77L34.12 -8.23L34.18 -8.68L34.21 -9.14L34.21 -9.60L34.20 -10.06L34.15 -10.52L34.08 -10.98L33.99 -11.43L33.88 -11.87L33.74 -12.31L33.57 -12.74L33.39 -13.16L33.18 -13.57L32.95 -13.97L16.27 -41.16L16.20 -41.27L16.12 -41.38L16.04 -41.48L15.95 -41.58L15.85 -41.67L15.75 -41.76L15.65 -41.84L15.54 -41.92L15.43 -41.99L15.31 -42.06L15.19 -42.12L15.07 -42.17L14.94 -42.22L14.82 -42.26L14.69 -42.29L14.56 -42.32L14.42 -42.34L14.29 -42.35L14.16 -42.35L14.03 -42.35L13.89 -42.34L13.76 -42.32L13.63 -42.30L13.50 -42.27L13.37 -42.23L13.25 -42.19L13.12 -42.14L13.00 -42.08L12.88 -42.02L12.77 -41.95L12.66 -41.87L12.56 -41.79L12.45 -41.70L12.36 -41.61L12.27 -41.51L12.18 -41.41L12.10 -41.30L12.03 -41.19L11.96 -41.08L11.90 -40.96L11.84 -40.84L11.79 -40.72L11.75 -40.59L11.71 -40.46ZM-3.175 -0.000a3.175 3.175 0 1 0 6.350 0a3.175 3.175 0 1 0 -6.350 0ZM9.267 -49.026a3.175 3.175 0 1 0 6.350 0a3.175 3.175 0 1 0 -6.350 0ZM37.737 -0.000a5.556 5.556 0 1 0 11.113 0a5.556 5.556 0 1 0 -11.113 0Z"/>
-              <!-- centerlines -->
               <path class="b-cl" d="M-5.5 0H5.5M0 -5.5V5.5M6.9 -49.026H18M12.442 -54.6V-43.5M36 0H50.6M43.293 -7.3V7.3"/>
-              <!-- 43.29 horizontal dimension -->
               <path class="b-dim" d="M0 6V15M43.293 8.2V15"/>
               <line class="b-dim" x1="0" y1="13.5" x2="43.293" y2="13.5" marker-start="url(#bc-arrow)" marker-end="url(#bc-arrow)"/>
               <text class="b-txt" x="21.65" y="12.4" text-anchor="middle">43.29</text>
-              <!-- 49.03 vertical dimension -->
               <path class="b-dim" d="M-6 0H-16.5M6.4 -49.026H-16.5"/>
               <line class="b-dim" x1="-15" y1="0" x2="-15" y2="-49.026" marker-start="url(#bc-arrow)" marker-end="url(#bc-arrow)"/>
               <text class="b-txt" x="-16" y="-24.5" text-anchor="middle" transform="rotate(-90 -16 -24.5)">49.03</text>
-              <!-- callouts -->
               <path class="b-dim" d="M47.22 -3.93L53.5 -12.6H56"/>
               <text class="b-txt" x="56.6" y="-14.2">PIVOT</text>
               <text class="b-txt" x="56.6" y="-11.3">Ø11.11 THRU</text>
@@ -340,25 +485,27 @@ footer { margin-top: 3rem; padding-top: 1.25rem; border-top: 1px solid var(--rul
             </svg>
             <figcaption>Final profile, drawn from my DXF. Constant 0.125 in thickness.</figcaption>
           </figure>
-          <div class="shot results">
-            <h4>Final results</h4>
-            <table class="specs results-table">
-              <thead><tr><th scope="col">Study</th><th scope="col">FOS</th><th scope="col">Max deflection</th></tr></thead>
-              <tbody>
-                <tr><th scope="row">Max compression</th><td>1.76</td><td>0.098 mm</td></tr>
-                <tr><th scope="row">Max tension</th><td>1.76</td><td>0.071 mm</td></tr>
-                <tr><th scope="row">Buckling</th><td>1.78</td><td>–</td></tr>
-                <tr class="req"><th scope="row">Requirement</th><td>≥ 1.75</td><td>≤ 0.100 mm</td></tr>
-              </tbody>
-            </table>
-            <h4>Mass by iteration</h4>
-            <table class="specs">
-              <tbody>
-                <tr><th scope="row">Starting blank</th><td>38.87 g</td></tr>
-                <tr><th scope="row">First optimized design</th><td>10.54 g</td></tr>
-                <tr><th scope="row">Final design</th><td><strong>8.85 g</strong> (−77%)</td></tr>
-              </tbody>
-            </table>
+          <div class="panel">
+            <div>
+              <h4>Final results</h4>
+              <table class="specs">
+                <thead><tr><th scope="col">Study</th><th scope="col">FOS</th><th scope="col">Max deflection</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">Max compression</th><td>1.76</td><td>0.098 mm</td></tr>
+                  <tr><th scope="row">Max tension</th><td>1.76</td><td>0.071 mm</td></tr>
+                  <tr><th scope="row">Buckling</th><td>1.78</td><td>–</td></tr>
+                  <tr class="req"><th scope="row">Required</th><td>≥ 1.75</td><td>≤ 0.100 mm</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div>
+              <h4>Mass by iteration</h4>
+              <ul class="bars" aria-label="Mass by iteration, bars drawn to scale">
+                <li><span class="lbl">Starting blank</span><span class="track"><span class="bar" style="width: 72%"></span><span class="val">38.87 g</span></span></li>
+                <li><span class="lbl">First design</span><span class="track"><span class="bar" style="width: 19.52%"></span><span class="val">10.54 g</span></span></li>
+                <li class="final"><span class="lbl">Final design</span><span class="track"><span class="bar" style="width: 16.39%"></span><span class="val">8.85 g</span></span></li>
+              </ul>
+            </div>
           </div>
         </div>
 
@@ -367,34 +514,41 @@ footer { margin-top: 3rem; padding-top: 1.25rem; border-top: 1px solid var(--rul
           <figcaption>Left: final design (blue) vs. first design (orange) and blank (grey). Center and right: von Mises stress in the max compression and max tension cases. Peaks of 470 and 469 MPa sit just under the 472.6 MPa allowed at FOS 1.75.</figcaption>
         </figure>
 
-        <div class="project-body">
-          <div>
-            <h4>Requirements</h4>
-            <ul>
-              <li>Factor of safety of at least 1.75 in both the max compression and max tension load cases, and in buckling.</li>
-              <li>Maximum deflection of 0.1 mm.</li>
-              <li>Waterjet-cut from 0.125 in Ti-5Al-2.5Sn, with no feature narrower than 0.75 mm.</li>
-              <li>My own added rule: at least 1.5 mm of material around each hole, to protect the bearing and pin bores.</li>
-            </ul>
-
-            <h4>Approach</h4>
-            <ul>
-              <li>Set up three SolidWorks Simulation studies (max compression, max tension, buckling) with the pivot fixed and a 0.225 mm mesh control on the stress hot spots.</li>
-              <li>Defined the part as a triangular frame with 18 design variables: width at each end of every leg, leg offsets, boss radii, pocket-corner radii and individual outer fillets.</li>
-              <li>Used an AI-assisted Python optimization with a plane-stress FEA model that checked stress, deflection and plate and in-plane buckling at every step.</li>
-              <li>Found that tiny geometry changes were causing 0.5–1.5% jumps in peak stress. Traced it to mesh noise and fixed it with a 0.12 mm mesh on fillets and pocket corners.</li>
-              <li>Compared layouts. A braced, topology-style frame was heavier than a plain triangle at the same safety factor, so the triangle was kept.</li>
-              <li>Cross-checked deflection and buckling with an independent 3D quadratic-tetrahedral model (buckling FOS 1.80 vs. 1.78), then verified the final geometry in SolidWorks.</li>
-            </ul>
-          </div>
-          <div class="notes">
+        <div class="body">
+          <div class="cols">
             <div>
-              <h4>Outcome</h4>
-              <p>Widening the search from constant-width legs to tapered, offset legs with individual fillets took the design from 10.54 g to 8.85 g, a further 16%. At the final design, compression stress, tension stress, buckling and deflection all sit at their limits at the same time, so this shape can’t get lighter without breaking a requirement.</p>
+              <h4>Requirements</h4>
+              <table class="specs kv">
+                <tbody>
+                  <tr><th scope="row">Factor of safety</th><td>≥ 1.75 in compression, tension and buckling</td></tr>
+                  <tr><th scope="row">Max deflection</th><td>≤ 0.1 mm</td></tr>
+                  <tr><th scope="row">Stock</th><td>0.125 in Ti-5Al-2.5Sn, waterjet cut</td></tr>
+                  <tr><th scope="row">Min. feature</th><td>0.75 mm</td></tr>
+                  <tr><th scope="row">Ring around holes</th><td>≥ 1.5 mm (my own rule, to protect the bores)</td></tr>
+                </tbody>
+              </table>
             </div>
             <div>
-              <h4>Manufacturing check</h4>
-              <p>Margins are thin: deflection is 1.6% under its limit and FOS is 0.6% over. A 0.1 mm waterjet over-cut would take about 4% off the thinnest leg, so I recommended toolpath compensation or adding 0.1 mm to each leg (about 0.2 g).</p>
+              <h4>Outcome</h4>
+              <p>Widening the search from constant-width legs to tapered, offset legs with individual fillets cut a further 16%, from 10.54 g to 8.85 g. Compression stress, tension stress, buckling and deflection now all sit at their limits at the same time, so this shape can’t get lighter without breaking a requirement.</p>
+            </div>
+          </div>
+
+          <div>
+            <h4>Approach</h4>
+            <ol class="steps">
+              <li><div><b>Set up the studies</b><span>Three SolidWorks Simulation studies (max compression, max tension, buckling) with the pivot fixed and a 0.225 mm mesh control at the hot spots.</span></div></li>
+              <li><div><b>Parameterized the shape</b><span>A triangular frame with 18 variables: width at each end of every leg, leg offsets, boss radii, pocket-corner radii and individual fillets.</span></div></li>
+              <li><div><b>Optimized for mass</b><span>An AI-assisted Python optimization with a plane-stress FEA model that checked stress, deflection and buckling at every step.</span></div></li>
+              <li><div><b>Removed mesh noise</b><span>Tiny geometry changes were causing 0.5–1.5% jumps in peak stress. A 0.12 mm mesh on fillets and pocket corners fixed it.</span></div></li>
+              <li><div><b>Compared layouts</b><span>A braced, topology-style frame was heavier than a plain triangle at the same safety factor, so the triangle was kept.</span></div></li>
+              <li><div><b>Verified independently</b><span>Cross-checked with a 3D quadratic-tetrahedral model (buckling FOS 1.80 vs. 1.78), then confirmed the final geometry in SolidWorks.</span></div></li>
+            </ol>
+          </div>
+
+          <div class="cols">
+            <div class="callout">
+              <p><b>Manufacturing check.</b> Margins are thin: deflection is 1.6% under its limit and FOS is 0.6% over. A 0.1 mm waterjet over-cut would take about 4% off the thinnest leg, so I recommended toolpath compensation or adding 0.1 mm to each leg, which costs about 0.2 g.</p>
             </div>
             <div>
               <h4>Skills applied</h4>
@@ -406,19 +560,21 @@ footer { margin-top: 3rem; padding-top: 1.25rem; border-top: 1px solid var(--rul
         </div>
       </article>
 
-      <!-- ===== Sheet 2: Terps Racing ===== -->
-      <article class="project" aria-labelledby="p-racing">
-        <div class="project-head">
-          <p class="sheet-no">SHEET 2 OF 4 · SEPT 2025 – PRESENT</p>
-          <h3 id="p-racing">Terps Racing: Suspension Design</h3>
-          <p class="summary">Member of the Vehicle Dynamics and Suspension sub-team on Terps Racing, Maryland’s Formula SAE team. The team designs, builds and races a formula-style car each year against about 120 universities at Michigan International Speedway.</p>
+      <!-- Sheet 2: Terps Racing suspension -->
+      <article class="sheet" aria-labelledby="p-racing">
+        <div class="sheet-head">
+          <div>
+            <p class="eyebrow mono-label">Terps Racing · Formula SAE · Sept 2025 – present</p>
+            <h3 id="p-racing">Suspension &amp; Vehicle Dynamics</h3>
+            <p class="summary">Member of the Vehicle Dynamics and Suspension sub-team on Maryland’s Formula SAE team, which designs, builds and races a formula-style car each year against about 120 universities at Michigan International Speedway.</p>
+          </div>
         </div>
 
         <dl class="titleblock">
           <div><dt>Role</dt><dd>Sub-team member</dd></div>
           <div><dt>Sub-team</dt><dd>Vehicle dynamics &amp; suspension</dd></div>
-          <div><dt>Competition</dt><dd>Formula SAE (combustion)</dd></div>
           <div><dt>Tools</dt><dd>SolidWorks, FEA</dd></div>
+          <div class="sheetno"><dt>Sheet</dt><dd>2 of 4</dd></div>
         </dl>
 
         <figure class="diagram">
@@ -454,45 +610,50 @@ footer { margin-top: 3rem; padding-top: 1.25rem; border-top: 1px solid var(--rul
           <figcaption>Side-view anti-dive geometry from my sub-team presentation. % anti-dive = tan θ × (L / h) × front brake share.</figcaption>
         </figure>
 
-        <div class="project-body">
-          <div>
-            <h4>Responsibilities</h4>
-            <ul>
-              <li>Design, analyze and test suspension components for the team’s yearly car using SolidWorks and FEA. The sub-team owns the uprights, bell cranks, anti-roll bars and A-arms.</li>
-              <li>Support prototyping, manufacturing and testing of suspension parts, with the goal of improving steering response, stability and driver feedback.</li>
-            </ul>
-
-            <h4>Technical presentation: anti-squat and anti-dive (Sept 2026)</h4>
-            <ul>
-              <li>Prepared and presented an analysis of how suspension geometry controls pitch under braking and acceleration.</li>
-              <li>Covered longitudinal load transfer (ΔW = m·a·h / L), side-view instant centers, and the percent anti-dive and anti-squat formulas.</li>
-              <li>Laid out the trade-offs: less pitch keeps ride height and camber stable, but too much anti makes the car harsh over bumps, changes caster through travel, and reduces driver feel.</li>
-            </ul>
-          </div>
-          <div class="notes">
+        <div class="body">
+          <div class="cols">
             <div>
-              <h4>Skills applied</h4>
-              <ul class="stack">
-                <li>SolidWorks</li><li>FEA</li><li>Suspension geometry</li><li>Vehicle dynamics</li><li>Technical presentations</li>
+              <h4>Responsibilities</h4>
+              <ul class="ticks">
+                <li>Design, analyze and test suspension components with SolidWorks and FEA. The sub-team owns the uprights, bell cranks, anti-roll bars and A-arms.</li>
+                <li>Support prototyping, manufacturing and testing, with the goal of better steering response, stability and driver feedback.</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Presentation: anti-squat &amp; anti-dive</h4>
+              <ul class="ticks">
+                <li>Presented to the sub-team in Sept 2026 on how suspension geometry controls pitch under braking and acceleration.</li>
+                <li>Covered load transfer (ΔW = m·a·h / L), side-view instant centers, and the percent anti-dive and anti-squat formulas.</li>
+                <li>Laid out the trade-offs: steadier ride height and camber vs. harshness over bumps, caster change and less driver feel.</li>
               </ul>
             </div>
           </div>
+          <ul class="stack">
+            <li>SolidWorks</li><li>FEA</li><li>Suspension geometry</li><li>Vehicle dynamics</li><li>Technical presentations</li>
+          </ul>
         </div>
       </article>
 
-      <!-- ===== Sheet 3: ENES100 OTV ===== -->
-      <article class="project" aria-labelledby="p-otv">
-        <div class="project-head">
-          <p class="sheet-no">SHEET 3 OF 4 · SEPT – DEC 2025</p>
-          <h3 id="p-otv">Autonomous Mission Robot</h3>
-          <p class="summary">Team leader and CAD lead for an 8-person team that designed and built an autonomous vehicle to navigate an obstacle course, identify plantable soil with a camera, plant a seed, and collect a soil sample.</p>
+      <!-- Sheet 3: ENES100 OTV -->
+      <article class="sheet" aria-labelledby="p-otv">
+        <div class="sheet-head has-figs">
+          <div>
+            <p class="eyebrow mono-label">ENES100 · Intro to Engineering Design · Fall 2025</p>
+            <h3 id="p-otv">Autonomous Mission Robot</h3>
+            <p class="summary">Team leader and CAD lead for an autonomous vehicle that navigates an obstacle course, finds plantable soil with a camera, plants a seed 10 mm deep and carries a 10 g soil sample to the finish.</p>
+          </div>
+          <dl class="figs">
+            <div><dt>person team led</dt><dd>8</dd></div>
+            <div><dt>chassis mass</dt><dd>125<small>g</small></dd></div>
+            <div><dt>under chassis budget</dt><dd>37<small>%</small></dd></div>
+          </dl>
         </div>
 
         <dl class="titleblock">
           <div><dt>Role</dt><dd>Team leader, CAD lead</dd></div>
-          <div><dt>Course</dt><dd>ENES100, Intro to Engineering Design</dd></div>
-          <div><dt>Constraints</dt><dd>≤ 3 kg, ≤ $320</dd></div>
+          <div><dt>Limits</dt><dd>3 kg, $320</dd></div>
           <div><dt>Tools</dt><dd>Onshape, 3D printing, shop tools</dd></div>
+          <div class="sheetno"><dt>Sheet</dt><dd>3 of 4</dd></div>
         </dl>
 
         <div class="shots-pair side">
@@ -506,177 +667,180 @@ footer { margin-top: 3rem; padding-top: 1.25rem; border-top: 1px solid var(--rul
           </figure>
         </div>
 
-        <div class="project-body">
-          <div>
-            <h4>Contributions</h4>
-            <ul>
-              <li>Modeled the full vehicle and mission mechanism in Onshape and produced the assembly and part drawings used for fabrication.</li>
-              <li>Designed a ¼ in plywood chassis (7 × 8 in) at about 125 g, 37% under its 200 g mass budget, with a 203 × 178 mm footprint sized to clear obstacles.</li>
-              <li>Designed a servo-driven parallel four-bar arm that keeps the bucket level through its stroke. Selected a 40 kg·cm servo for the arm and a 9 g, 270° servo to tilt the bucket.</li>
-              <li>Placed the battery opposite the arm to keep the center of gravity low and centered, preventing tip-over while digging.</li>
-              <li>Cut and machined the chassis with hand and power tools. 3D-printed the PLA arm mount and eight motor mounts.</li>
-              <li>Replaced the scooping mechanism after it failed testing with an adhesive-based retrieval system.</li>
-              <li>Coordinated with the electronics and navigation sub-teams on camera placement, wiring and drivetrain layout. Wrote the team charter and built the project schedule.</li>
-            </ul>
-          </div>
-
-          <div class="notes">
+        <div class="body">
+          <div class="cols three">
             <div>
-              <h4>Design data</h4>
-              <table class="specs">
-                <tbody>
-                  <tr><th scope="row">Mass limit</th><td>3 kg</td></tr>
-                  <tr><th scope="row">Budget limit</th><td>$320</td></tr>
-                  <tr><th scope="row">Chassis base</th><td>7 × 8 × ¼ in ply, ≈125 g</td></tr>
-                  <tr><th scope="row">Footprint</th><td>≈203 × 178 mm</td></tr>
-                  <tr><th scope="row">Arm servo</th><td>40 kg·cm, 180°</td></tr>
-                  <tr><th scope="row">Bucket servo</th><td>1.5 kg·cm, 270°, 9 g</td></tr>
-                  <tr><th scope="row">Drive</th><td>4 DC motors, mecanum wheels</td></tr>
-                </tbody>
-              </table>
+              <h4>Design</h4>
+              <ul class="ticks">
+                <li>Modeled the vehicle and mission mechanism in Onshape and released the drawings used for fabrication.</li>
+                <li>Designed a servo-driven parallel four-bar arm that keeps the bucket level, with a 40 kg·cm arm servo and a 9 g, 270° bucket servo.</li>
+                <li>Placed the battery opposite the arm to keep the center of gravity low and stop tip-over while digging.</li>
+              </ul>
             </div>
             <div>
-              <h4>Skills applied</h4>
-              <ul class="stack">
-                <li>Onshape</li><li>Engineering drawings</li><li>Mechanism design</li><li>3D printing</li><li>Machining</li><li>Prototyping &amp; testing</li><li>Team leadership</li>
+              <h4>Build &amp; test</h4>
+              <ul class="ticks">
+                <li>Cut and machined the ¼ in plywood chassis with hand and power tools.</li>
+                <li>3D-printed the PLA arm mount and eight motor mounts.</li>
+                <li>Replaced the scooping mechanism after it failed testing with an adhesive-based retrieval system.</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Leadership</h4>
+              <ul class="ticks">
+                <li>Led the team and wrote the team charter.</li>
+                <li>Built the project schedule tracking each milestone’s tasks, owners and dates.</li>
+                <li>Coordinated with the electronics and navigation sub-teams on camera placement, wiring and drivetrain layout.</li>
               </ul>
             </div>
           </div>
+          <ul class="stack">
+            <li>Onshape</li><li>Engineering drawings</li><li>Mechanism design</li><li>3D printing</li><li>Machining</li><li>Prototyping &amp; testing</li><li>Team leadership</li>
+          </ul>
         </div>
       </article>
 
-      <!-- ===== Sheet 4: Balsa bridge ===== -->
-      <article class="project" aria-labelledby="p-bridge">
-        <div class="project-head">
-          <p class="sheet-no">SHEET 4 OF 4 · 2022 – 2024</p>
-          <h3 id="p-bridge">Balsa Wood Truss Bridge</h3>
-          <p class="summary">Designed and hand-built a balsa wood truss bridge that held over 300 lb, setting a school record. Project Lead the Way engineering program.</p>
+      <!-- Sheet 4: Balsa bridge -->
+      <article class="sheet" aria-labelledby="p-bridge">
+        <div class="sheet-head has-figs">
+          <div>
+            <p class="eyebrow mono-label">Project Lead the Way · 2022 – 2024</p>
+            <h3 id="p-bridge">Balsa Wood Truss Bridge</h3>
+            <p class="summary">Designed and hand-built a balsa wood truss bridge that held over 300 lb, a school record.</p>
+          </div>
+          <dl class="figs one">
+            <div><dt>load held, a school record</dt><dd>300+<small>lb</small></dd></div>
+          </dl>
         </div>
         <dl class="titleblock">
-          <div><dt>Program</dt><dd>Project Lead the Way</dd></div>
-          <div><dt>Result</dt><dd>300+ lb, school record</dd></div>
           <div><dt>Methods</dt><dd>Statics, material selection</dd></div>
+          <div><dt>Build</dt><dd>Hand fabrication</dd></div>
+          <div class="sheetno"><dt>Sheet</dt><dd>4 of 4</dd></div>
         </dl>
-        <div class="project-body">
-          <div>
-            <h4>Contributions</h4>
-            <ul>
+        <div class="body">
+          <div class="cols">
+            <ul class="ticks">
               <li>Selected the truss geometry and sized each member using statics and material properties.</li>
-              <li>Designed the joint configurations and gusset plates to prevent failure at the connections.</li>
+              <li>Designed the joints and gusset plates to prevent failure at the connections.</li>
               <li>Also designed and built hydrogen fuel-cell cars optimized for efficiency in the same program.</li>
             </ul>
-          </div>
-          <div class="notes">
-            <div>
-              <h4>Skills applied</h4>
-              <ul class="stack">
-                <li>Truss design</li><li>Statics</li><li>Material selection</li><li>Hand fabrication</li>
-              </ul>
-            </div>
+            <ul class="stack">
+              <li>Truss design</li><li>Statics</li><li>Material selection</li><li>Hand fabrication</li>
+            </ul>
           </div>
         </div>
       </article>
 
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="section" id="experience">
-      <h2>Experience &amp; leadership</h2>
-
-      <h3 class="subhead">Work experience</h3>
-      <ul class="log">
-        <li>
-          <span class="when">Jun 2023 – present</span>
-          <div>
-            <h3>Front Desk Manager &amp; Coach <span class="org">· Dutch Total Soccer, Somerset, NJ</span></h3>
-            <ul>
-              <li>Coordinate lunches and camp logistics for 200+ campers per week and resolve scheduling and customer issues in real time.</li>
-              <li>Coach 15+ campers per week in basic and advanced soccer skills.</li>
-            </ul>
-          </div>
-        </li>
-        <li>
-          <span class="when">Oct 2023 – Aug 2024</span>
-          <div>
-            <h3>Kitchen Worker &amp; Delivery Driver <span class="org">· Ciro’s Pizza and Deli, Warren, NJ</span></h3>
-            <ul>
-              <li>Managed kitchen inventory and ensured order accuracy in a high-volume environment.</li>
-              <li>Delivered orders on time while maintaining quality standards.</li>
-            </ul>
-          </div>
-        </li>
-      </ul>
-
-      <h3 class="subhead">Leadership &amp; activities</h3>
-      <ul class="log">
-        <li>
-          <span class="when">May 2026 – present</span>
-          <div>
-            <h3>Risk Reduction Chair <span class="org">· Sigma Nu Fraternity, Delta Phi Chapter</span></h3>
-            <ul>
-              <li>Elected to the executive board to lead risk management and ensure compliance with university, national and IFC policies.</li>
-              <li>Serve as primary point of contact during emergencies, coordinating with university officials and national headquarters.</li>
-            </ul>
-          </div>
-        </li>
-        <li>
-          <span class="when">Dec 2025 – present</span>
-          <div>
-            <h3>Social Chair <span class="org">· University of Maryland Club Soccer</span></h3>
-            <ul>
-              <li>Plan and run club events that build team community and support recruitment.</li>
-            </ul>
-          </div>
-        </li>
-        <li>
-          <span class="when">Nov 2021 – Jun 2025</span>
-          <div>
-            <h3>Class President <span class="org">· Watchung Hills Regional High School</span></h3>
-            <ul>
-              <li>Led student government for four years, coordinating school-wide events with 1,000+ attendees.</li>
-              <li>Advocated for student-focused policy changes directly with school administration.</li>
-              <li>Named Somerset County Scholar Athlete of the Year.</li>
-            </ul>
-          </div>
-        </li>
-        <li>
-          <span class="when">Nov 2023 – Jun 2025</span>
-          <div>
-            <h3>Volunteer Fundraiser <span class="org">· Leukemia &amp; Lymphoma Society, Student Visionaries of the Year</span></h3>
-            <ul>
-              <li>Raised over $2,000 in a six-week campaign, contributing to a $25,000 team total.</li>
-            </ul>
-          </div>
-        </li>
-      </ul>
-    </section>
-
-    <section class="section" id="skills">
-      <h2>Skills &amp; coursework</h2>
-      <dl class="skills">
-        <div><dt>CAD &amp; analysis</dt><dd><ul class="stack"><li>SolidWorks</li><li>SolidWorks Simulation (FEA)</li><li>Onshape</li><li>Engineering drawings</li><li>Buckling analysis</li><li>Design optimization</li></ul></dd></div>
-        <div><dt>Fabrication</dt><dd><ul class="stack"><li>3D printing</li><li>Hand &amp; power tools</li><li>Machining</li><li>Design for waterjet cutting</li><li>Prototyping &amp; testing</li></ul></dd></div>
-        <div><dt>Software</dt><dd><ul class="stack"><li>Python</li><li>MATLAB</li><li>Excel</li></ul></dd></div>
-        <div><dt>Professional</dt><dd><ul class="stack"><li>Team leadership</li><li>Technical presentations</li><li>Technical writing</li><li>Project scheduling</li></ul></dd></div>
-        <div><dt>Relevant coursework</dt><dd>CAD Design in SolidWorks (ENME272), Dynamics, Mechanics I &amp; II, Differential Equations (MATH246), Introduction to Engineering Design (ENES100)</dd></div>
-        <div><dt>Languages &amp; interests</dt><dd>English, basic Spanish. Interested in aerospace and mechanical design, the automotive industry, construction and renewable energy.</dd></div>
-      </dl>
-    </section>
-
-    <section class="section" id="contact">
-      <h2>Contact</h2>
-      <div class="contact">
-        <p>I’m looking for a Summer 2027 mechanical engineering internship and would welcome the chance to talk about how I can contribute to your team.</p>
-        <p class="big"><a href="mailto:brady.sifert@gmail.com">brady.sifert@gmail.com</a></p>
-        <ul class="links">
-          <li><a class="btn primary" href="mailto:brady.sifert@gmail.com">Email me</a></li>
-          <li><a class="btn" href="https://www.linkedin.com/in/bradysifert">linkedin.com/in/bradysifert ↗</a></li>
-        </ul>
+  <!-- ===== Experience ===== -->
+  <section class="section" id="experience">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="mono-label">Background</p>
+        <h2>Experience &amp; leadership</h2>
       </div>
-    </section>
-  </main>
+      <div class="exp">
+        <div>
+          <h3 class="col-title mono-label">Work experience</h3>
+          <ul class="roles">
+            <li>
+              <p class="when">Jun 2023 – present</p>
+              <h4>Front Desk Manager &amp; Coach</h4>
+              <p class="org">Dutch Total Soccer · Somerset, NJ</p>
+              <ul>
+                <li>Coordinate lunches and camp logistics for 200+ campers per week and resolve scheduling and customer issues in real time.</li>
+                <li>Coach 15+ campers per week in basic and advanced soccer skills.</li>
+              </ul>
+            </li>
+            <li>
+              <p class="when">Oct 2023 – Aug 2024</p>
+              <h4>Kitchen Worker &amp; Delivery Driver</h4>
+              <p class="org">Ciro’s Pizza and Deli · Warren, NJ</p>
+              <ul>
+                <li>Managed kitchen inventory and kept orders accurate in a high-volume environment.</li>
+                <li>Delivered orders on time while maintaining quality standards.</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="col-title mono-label">Leadership &amp; activities</h3>
+          <ul class="roles">
+            <li>
+              <p class="when">May 2026 – present</p>
+              <h4>Risk Reduction Chair</h4>
+              <p class="org">Sigma Nu Fraternity, Delta Phi Chapter</p>
+              <ul>
+                <li>Elected to the executive board to lead risk management and compliance with university, national and IFC policies.</li>
+                <li>Primary point of contact in emergencies, coordinating with university officials and national headquarters.</li>
+              </ul>
+            </li>
+            <li>
+              <p class="when">Dec 2025 – present</p>
+              <h4>Social Chair</h4>
+              <p class="org">University of Maryland Club Soccer</p>
+              <ul>
+                <li>Plan and run club events that build team community and support recruitment.</li>
+              </ul>
+            </li>
+            <li>
+              <p class="when">Nov 2021 – Jun 2025</p>
+              <h4>Class President, four years</h4>
+              <p class="org">Watchung Hills Regional High School</p>
+              <ul>
+                <li>Led student government and coordinated school-wide events with 1,000+ attendees.</li>
+                <li>Named Somerset County Scholar Athlete of the Year.</li>
+              </ul>
+            </li>
+            <li>
+              <p class="when">Nov 2023 – Jun 2025</p>
+              <h4>Volunteer Fundraiser</h4>
+              <p class="org">Leukemia &amp; Lymphoma Society</p>
+              <ul>
+                <li>Raised over $2,000 in a six-week campaign, part of a $25,000 team total.</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <footer>Brady Sifert · Mechanical Engineering, University of Maryland · Updated October 2026</footer>
-</div>
+  <!-- ===== Skills ===== -->
+  <section class="section" id="skills">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="mono-label">Toolkit</p>
+        <h2>Skills &amp; coursework</h2>
+      </div>
+      <dl class="skills">
+        <div><dt class="mono-label">CAD &amp; analysis</dt><dd><ul class="stack"><li>SolidWorks</li><li>SolidWorks Simulation</li><li>Onshape</li><li>Engineering drawings</li><li>Buckling analysis</li><li>Design optimization</li></ul></dd></div>
+        <div><dt class="mono-label">Fabrication</dt><dd><ul class="stack"><li>3D printing</li><li>Hand &amp; power tools</li><li>Machining</li><li>Design for waterjet</li><li>Prototyping &amp; testing</li></ul></dd></div>
+        <div><dt class="mono-label">Software</dt><dd><ul class="stack"><li>Python</li><li>MATLAB</li><li>Excel</li></ul></dd></div>
+        <div><dt class="mono-label">Professional</dt><dd><ul class="stack"><li>Team leadership</li><li>Technical presentations</li><li>Technical writing</li><li>Project scheduling</li></ul></dd></div>
+        <div><dt class="mono-label">Coursework</dt><dd><p>CAD Design in SolidWorks (ENME272), Dynamics, Mechanics I &amp; II, Differential Equations (MATH246), Intro to Engineering Design (ENES100)</p></dd></div>
+        <div><dt class="mono-label">Interests</dt><dd><p>Aerospace and mechanical design, automotive, construction and renewable energy. English and basic Spanish.</p></dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ===== Contact ===== -->
+  <section class="contact band" id="contact">
+    <div class="wrap">
+      <p class="mono-label">Contact</p>
+      <h2>Hiring a Summer 2027 mechanical engineering intern?</h2>
+      <p class="lede">I’d welcome the chance to talk about these projects and how I can contribute to your team.</p>
+      <a class="email" href="mailto:brady.sifert@gmail.com">brady.sifert@gmail.com</a>
+      <ul class="links">
+        <li><a class="btn primary" href="mailto:brady.sifert@gmail.com">Email me</a></li>
+        <li><a class="btn" href="https://www.linkedin.com/in/bradysifert">linkedin.com/in/bradysifert ↗</a></li>
+      </ul>
+      <footer>Brady Sifert · Mechanical Engineering, University of Maryland · Updated October 2026</footer>
+    </div>
+  </section>
+</main>
 </body>
 </html>

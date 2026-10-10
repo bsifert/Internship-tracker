@@ -5,15 +5,18 @@ CSS with no build step: open `index.html` in a browser to preview it.
 
 ## What's on it
 
-Written for recruiters: the hero says what I'm looking for (Summer 2027
-mechanical engineering internship), then four project "sheets", experience,
-skills and contact.
+Written for recruiters. A dark "drafting table" hero states what I'm looking
+for (Summer 2027 mechanical engineering internship) with the bell crank drawn
+beside it and four headline numbers. Then four project "sheets", experience,
+skills, and a closing contact band.
 
-1. **Minimum-Mass Titanium Bell Crank**: 38.87 g blank to 8.85 g in 0.125 in
-   Ti-5Al-2.5Sn, FOS 1.76 and 0.098 mm deflection. The drawing is generated from
-   `Bellcrank_0125in_8p85g.dxf` (dimensions in mm).
-2. **Terps Racing: Suspension Design**: sub-team role and the anti-squat /
-   anti-dive presentation, with a side-view geometry diagram.
+1. **Minimum-Mass Titanium Bell Crank** (Terps Racing challenge): 38.87 g blank
+   to 8.85 g in 0.125 in Ti-5Al-2.5Sn, FOS 1.76 and 0.098 mm deflection. Both
+   bell crank drawings (hero and sheet) are generated from
+   `Bellcrank_0125in_8p85g.dxf` (dimensions in mm); `assets/bellcrank-fea.png`
+   holds the stress plots.
+2. **Suspension & Vehicle Dynamics** (Terps Racing): sub-team role and the
+   anti-squat / anti-dive presentation, with a side-view geometry diagram.
 3. **Autonomous Mission Robot** (ENES100): team lead and CAD lead. Drawings in
    `assets/otv-*.png` come from the Milestone 3 design report.
 4. **Balsa Wood Truss Bridge**: 300+ lb school record.
