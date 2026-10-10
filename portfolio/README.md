@@ -5,18 +5,20 @@ CSS with no build step: open `index.html` in a browser to preview it.
 
 ## What's on it
 
-1. **Autonomous Mission Robot** (ENES100, Fall 2025): team lead and CAD lead.
-   Drawings in `assets/otv-*.png` come from the Milestone 3 design report.
-2. **Terps Racing Suspension**: vehicle dynamics and suspension sub-team, with the
-   anti-squat / anti-dive brief and a side-view geometry diagram.
-3. **Internship Tracker**: the React app in this repo.
-4. **Balsa Wood Truss Bridge**: Project Lead the Way, 300+ lb school record.
-5. **Engineering Research & Writing**: ENES200 brake-caliper case study, JOUR130 paper.
+Written for recruiters: the hero says what I'm looking for (Summer 2027
+mechanical engineering internship), then four project "sheets", experience,
+skills and contact.
 
-Then work experience, leadership, skills and coursework, and contact details.
+1. **Minimum-Mass Titanium Bell Crank**: 38.87 g blank to 8.85 g in 0.125 in
+   Ti-5Al-2.5Sn, FOS 1.76 and 0.098 mm deflection. The drawing is generated from
+   `Bellcrank_0125in_8p85g.dxf` (dimensions in mm).
+2. **Terps Racing: Suspension Design**: sub-team role and the anti-squat /
+   anti-dive presentation, with a side-view geometry diagram.
+3. **Autonomous Mission Robot** (ENES100): team lead and CAD lead. Drawings in
+   `assets/otv-*.png` come from the Milestone 3 design report.
+4. **Balsa Wood Truss Bridge**: 300+ lb school record.
 
-Phone number, home address and GPA are left off on purpose, since the site is
-public. Employers get those from the résumé.
+Phone number and home address are left off on purpose, since the site is public.
 
 ## Updating it
 
