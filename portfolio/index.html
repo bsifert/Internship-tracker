@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Brady Sifert — Projects</title>
-<meta name="description" content="Projects by Brady Sifert, including Internship Tracker, a React + TypeScript app for running an internship search.">
+<title>Brady Sifert Portfolio</title>
+<meta name="description" content="Brady Sifert, mechanical engineering student at the University of Maryland: design projects, Terps Racing suspension work, software, experience and leadership.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@112,600;125,800&family=IBM+Plex+Mono:wght@400;500&family=Public+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
 <style>
-/* Layout: a single drawing sheet. Each project gets an engineering-style title block
-   (boxed label/value grid) above its write-up, the way a drawing set labels each sheet. */
+/* Layout: a drawing set. Each project is a sheet with an engineering title block
+   (boxed label/value grid) above its write-up, the way a drawing labels each sheet. */
 :root {
   --paper: #f5f6f3;
   --sheet: #ffffff;
@@ -19,8 +19,7 @@
   --rule: #cfd5d6;
   --accent: #0b6470;
   --accent-wash: #e3eff0;
-  --todo: #fff1b8;
-  --todo-ink: #5c4600;
+  --drawing-bg: #ffffff;
 
   --font-display: "Archivo", "Arial Narrow", system-ui, sans-serif;
   --font-body: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -28,20 +27,19 @@
 
   --measure: 66ch;
   --gutter: clamp(16px, 4vw, 40px);
+  --pad: clamp(1.25rem, 3.5vw, 2.25rem);
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --paper: #10171d; --sheet: #161f27; --ink: #e6ebee; --ink-soft: #a3b0ba;
-    --rule: #2c3842; --accent: #5cc3cf; --accent-wash: #15313a;
-    --todo: #4a3d0c; --todo-ink: #ffe9a3;
+    --rule: #2c3842; --accent: #5cc3cf; --accent-wash: #15313a; --drawing-bg: #f3f5f4;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --paper: #10171d; --sheet: #161f27; --ink: #e6ebee; --ink-soft: #a3b0ba;
-  --rule: #2c3842; --accent: #5cc3cf; --accent-wash: #15313a;
-  --todo: #4a3d0c; --todo-ink: #ffe9a3;
+  --rule: #2c3842; --accent: #5cc3cf; --accent-wash: #15313a; --drawing-bg: #f3f5f4;
   color-scheme: dark;
 }
 
@@ -63,9 +61,6 @@ a:hover { text-decoration-thickness: 2px; }
 
 .wrap { max-width: 1040px; margin-inline: auto; }
 
-/* Placeholder text you still need to fill in. Remove the class once it's real. */
-.todo { background: var(--todo); color: var(--todo-ink); padding: 0 0.3em; border-radius: 3px; }
-
 /* ---------- top bar ---------- */
 .topbar {
   display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between;
@@ -73,7 +68,7 @@ a:hover { text-decoration-thickness: 2px; }
   font-family: var(--font-mono); font-size: 0.8125rem;
 }
 .topbar .mark { color: var(--ink); text-decoration: none; font-weight: 500; letter-spacing: 0.02em; }
-.topbar nav { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+.topbar nav { display: flex; gap: 0.4rem 1.25rem; flex-wrap: wrap; }
 .topbar nav a { color: var(--ink-soft); text-decoration: none; }
 .topbar nav a:hover { color: var(--accent); }
 
@@ -88,9 +83,9 @@ a:hover { text-decoration-thickness: 2px; }
   font-size: clamp(2.6rem, 8.5vw, 5.25rem); line-height: 0.98; letter-spacing: -0.02em;
   margin: 0; text-wrap: balance;
 }
-.hero .lede { font-size: clamp(1.125rem, 2.2vw, 1.3rem); max-width: 38ch; margin: 1.5rem 0 0; color: var(--ink-soft); }
+.hero .lede { font-size: clamp(1.125rem, 2.2vw, 1.3rem); max-width: 44ch; margin: 1.5rem 0 0; color: var(--ink-soft); }
 .hero .lede strong { color: var(--ink); font-weight: 600; }
-.links { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2rem; padding: 0; list-style: none; }
+.links { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 2rem 0 0; padding: 0; list-style: none; }
 .btn {
   display: inline-flex; align-items: center; gap: 0.4em; padding: 0.6rem 1rem;
   border: 1px solid var(--ink); color: var(--ink); text-decoration: none;
@@ -101,16 +96,21 @@ a:hover { text-decoration-thickness: 2px; }
 .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--sheet); }
 .btn.primary:hover { background: var(--ink); border-color: var(--ink); color: var(--paper); }
 
+.hero .titleblock { margin-top: 2.5rem; border: 1px solid var(--rule); border-bottom: 0; border-right: 0; background: var(--sheet); }
+.hero .titleblock div { padding-inline: 1rem; }
+
 /* ---------- section headings ---------- */
 .section { padding-block: 3rem 1rem; border-top: 1px solid var(--rule); }
 .section > h2 {
   font-family: var(--font-mono); font-weight: 500; font-size: 0.8125rem;
   text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-soft); margin: 0 0 2rem;
 }
+.sheets { display: grid; gap: 2.5rem; }
 
 /* ---------- project sheet ---------- */
-.project { background: var(--sheet); border: 1px solid var(--rule); }
-.project-head { padding: clamp(1.25rem, 3.5vw, 2.25rem); display: grid; gap: 1rem; }
+.project { background: var(--sheet); border: 1px solid var(--rule); min-width: 0; }
+.project-head { padding: var(--pad); display: grid; gap: 1rem; }
+.sheet-no { font-family: var(--font-mono); font-size: 0.75rem; color: var(--ink-soft); letter-spacing: 0.06em; margin: 0; }
 .project h3 {
   font-family: var(--font-display); font-weight: 600; font-stretch: 112%;
   font-size: clamp(1.75rem, 4.5vw, 2.6rem); line-height: 1.05; margin: 0; text-wrap: balance;
@@ -123,19 +123,29 @@ a:hover { text-decoration-thickness: 2px; }
   display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   border-top: 1px solid var(--rule); margin: 0;
 }
-.titleblock div { padding: 0.75rem clamp(1.25rem, 3.5vw, 2.25rem) 0.85rem; border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); min-width: 0; }
+.titleblock div { padding: 0.75rem var(--pad) 0.85rem; border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); min-width: 0; }
 .titleblock dt { font-family: var(--font-mono); font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-soft); }
 .titleblock dd { margin: 0.15rem 0 0; font-weight: 500; font-size: 0.9375rem; }
 
-.shot { margin: 0; border-bottom: 1px solid var(--rule); background: var(--paper); }
+.shot { margin: 0; border-bottom: 1px solid var(--rule); background: var(--paper); min-width: 0; }
 .shot img { width: 100%; }
-.shot figcaption { font-family: var(--font-mono); font-size: 0.75rem; color: var(--ink-soft); padding: 0.6rem clamp(1.25rem, 3.5vw, 2.25rem); border-top: 1px solid var(--rule); background: var(--sheet); }
+.shot.drawing { background: var(--drawing-bg); }
+.shot.drawing img { padding: clamp(0.5rem, 2vw, 1.25rem); }
+.shot figcaption { font-family: var(--font-mono); font-size: 0.75rem; color: var(--ink-soft); padding: 0.6rem var(--pad); border-top: 1px solid var(--rule); background: var(--sheet); }
+.shots-pair { display: grid; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 860px) {
+  .shots-pair.side { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); }
+  .shots-pair.side .shot + .shot { border-left: 1px solid var(--rule); }
+  .shots-pair.side .shot { display: flex; flex-direction: column; justify-content: space-between; }
+  .shots-pair.side .shot img { margin-block: auto; }
+}
 
 .project-body {
-  padding: clamp(1.25rem, 3.5vw, 2.25rem);
+  padding: var(--pad);
   display: grid; gap: 2.5rem; grid-template-columns: minmax(0, 1fr);
 }
 @media (min-width: 860px) { .project-body { grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); } }
+.project-body > * { min-width: 0; }
 .project-body h4 {
   font-family: var(--font-mono); font-weight: 500; font-size: 0.75rem; text-transform: uppercase;
   letter-spacing: 0.1em; color: var(--accent); margin: 0 0 0.6rem;
@@ -148,18 +158,60 @@ a:hover { text-decoration-thickness: 2px; }
 .note { border-left: 2px solid var(--accent); padding-left: 1rem; }
 .note p { margin: 0; font-size: 0.975rem; color: var(--ink-soft); }
 .note p strong { color: var(--ink); font-weight: 600; }
-.shots-pair { display: grid; grid-template-columns: minmax(0, 1fr); }
 
-.stack { display: flex; flex-wrap: wrap; gap: 0.4rem; padding: 0; margin: 0; list-style: none; }
-.stack li { font-family: var(--font-mono); font-size: 0.75rem; padding: 0.2rem 0.55rem; background: var(--accent-wash); color: var(--ink); border-radius: 2px; margin: 0; }
+.stack { display: flex; flex-wrap: wrap; gap: 0.4rem; padding: 0 !important; margin: 0 !important; list-style: none; }
+.stack li { font-family: var(--font-mono); font-size: 0.75rem; padding: 0.2rem 0.55rem; background: var(--accent-wash); color: var(--ink); border-radius: 2px; margin: 0 !important; }
 
-/* ---------- about / contact ---------- */
+/* Spec table for real numbers (mass, size, torque). */
+.specs { width: 100%; border-collapse: collapse; font-size: 0.9375rem; font-variant-numeric: tabular-nums; }
+.specs th, .specs td { text-align: left; padding: 0.45rem 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+.specs th { font-weight: 500; color: var(--ink-soft); padding-right: 1rem; width: 45%; }
+.specs td { font-family: var(--font-mono); font-size: 0.875rem; }
+
+/* Side-view suspension diagram */
+.diagram { margin: 0; border-bottom: 1px solid var(--rule); background: var(--paper); }
+.diagram .scroll { overflow-x: auto; padding: var(--pad); }
+.diagram svg { display: block; width: 100%; min-width: 520px; height: auto; }
+.diagram figcaption { font-family: var(--font-mono); font-size: 0.75rem; color: var(--ink-soft); padding: 0.6rem var(--pad); border-top: 1px solid var(--rule); background: var(--sheet); }
+.d-ground, .d-body, .d-wheel, .d-arm { stroke: var(--ink); fill: none; }
+.d-ground { stroke-width: 1.5; }
+.d-body { stroke-width: 2; }
+.d-wheel { stroke-width: 2; fill: var(--sheet); }
+.d-arm { stroke-width: 3; stroke-linecap: round; }
+.d-con { stroke: var(--accent); stroke-width: 1.5; stroke-dasharray: 6 5; fill: none; }
+.d-ref { stroke: var(--ink-soft); stroke-width: 1; stroke-dasharray: 2 4; fill: none; }
+.d-dot { fill: var(--accent); }
+.d-cg { fill: var(--sheet); stroke: var(--ink); stroke-width: 1.5; }
+.d-cgq { fill: var(--ink); }
+.d-label { font-family: var(--font-mono); font-size: 13px; fill: var(--ink-soft); }
+.d-label.acc { fill: var(--accent); }
+
+/* Compact sheets for smaller projects */
+.minis { display: grid; gap: 2.5rem; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 860px) { .minis { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+.minis .project { display: flex; flex-direction: column; }
+.minis .project-body { grid-template-columns: minmax(0, 1fr); gap: 0; flex: 1; }
+.minis .project h3 { font-size: clamp(1.5rem, 3.4vw, 1.9rem); }
+.minis .summary { font-size: 1.0625rem; }
+
+/* ---------- experience / leadership ---------- */
+.log { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--rule); }
+.log li { display: grid; gap: 0.25rem 2rem; grid-template-columns: minmax(0, 1fr); padding-block: 1.25rem; border-bottom: 1px solid var(--rule); }
+@media (min-width: 760px) { .log li { grid-template-columns: 13rem minmax(0, 1fr); } }
+.log .when { font-family: var(--font-mono); font-size: 0.8125rem; color: var(--ink-soft); font-variant-numeric: tabular-nums; padding-top: 0.2rem; }
+.log h3 { margin: 0; font-size: 1.0625rem; font-weight: 600; }
+.log .org { color: var(--ink-soft); font-weight: 400; }
+.log p { margin: 0.35rem 0 0; max-width: var(--measure); }
+.subhead { font-family: var(--font-mono); font-weight: 500; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin: 2.5rem 0 0.75rem; }
+.subhead:first-of-type { margin-top: 0; }
+
+/* ---------- skills / about ---------- */
 .about { display: grid; gap: 2rem; grid-template-columns: minmax(0, 1fr); }
 @media (min-width: 860px) { .about { grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); } }
 .about p { margin: 0 0 1.1rem; max-width: var(--measure); }
-.facts { margin: 0; display: grid; gap: 0.9rem; align-content: start; }
-.facts dt { font-family: var(--font-mono); font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-soft); }
-.facts dd { margin: 0.1rem 0 0; }
+.facts { margin: 0; display: grid; gap: 1.1rem; align-content: start; }
+.facts dt { font-family: var(--font-mono); font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-soft); margin-bottom: 0.3rem; }
+.facts dd { margin: 0; }
 
 .contact p { max-width: var(--measure); margin: 0 0 1rem; }
 .contact .big {
@@ -169,13 +221,11 @@ a:hover { text-decoration-thickness: 2px; }
 
 footer { margin-top: 3rem; padding-top: 1.25rem; border-top: 1px solid var(--rule); font-family: var(--font-mono); font-size: 0.75rem; color: var(--ink-soft); }
 
-/* Printing or saving as PDF: drop chrome, keep it to clean pages. */
 @media print {
-  :root { --paper: #fff; --sheet: #fff; --ink: #000; --ink-soft: #333; --accent: #0b6470; --todo: transparent; --todo-ink: #000; }
+  :root { --paper: #fff; --sheet: #fff; --ink: #000; --ink-soft: #333; --accent: #0b6470; }
   body { padding: 0; font-size: 11pt; }
   .topbar nav, .links { display: none; }
-  .project, .shot { break-inside: avoid; }
-  a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 0.8em; color: #333; }
+  .project, .shot, .log li { break-inside: avoid; }
 }
 </style>
 </head>
@@ -186,33 +236,204 @@ footer { margin-top: 3rem; padding-top: 1.25rem; border-top: 1px solid var(--rul
     <a class="mark" href="#top">Brady Sifert</a>
     <nav aria-label="Sections">
       <a href="#projects">Projects</a>
-      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
       <a href="#contact">Contact</a>
     </nav>
   </header>
 
   <main id="top">
     <section class="hero">
-      <!-- EDIT: confirm school / major / year. Anything highlighted yellow is a placeholder. -->
-      <p class="eyebrow">University of Maryland · <span class="todo">Major, Class of 20XX</span></p>
+      <p class="eyebrow">B.S. Mechanical Engineering · University of Maryland · Class of 2029</p>
       <h1>Brady Sifert</h1>
-      <p class="lede">I build <strong>practical software</strong> for problems I actually have, then keep using it and keep improving it.</p>
+      <p class="lede">I’m a sophomore in Maryland’s Clark School of Engineering. I <strong>design parts in CAD, build them by hand, and redesign them</strong> when testing shows they don’t work. I’m looking for a <strong>Summer 2027 mechanical engineering internship</strong>.</p>
       <ul class="links">
         <li><a class="btn primary" href="#projects">See projects ↓</a></li>
+        <li><a class="btn" href="mailto:brady.sifert@gmail.com">Email me</a></li>
+        <li><a class="btn" href="https://www.linkedin.com/in/bradysifert">LinkedIn ↗</a></li>
         <li><a class="btn" href="https://github.com/bsifert">GitHub ↗</a></li>
-        <!-- EDIT: point these at your real résumé PDF and LinkedIn, or delete the lines. -->
-        <li><a class="btn" href="resume.pdf">Résumé (PDF)</a></li>
-        <li><a class="btn" href="https://www.linkedin.com/in/your-handle">LinkedIn ↗</a></li>
       </ul>
+      <dl class="titleblock">
+        <div><dt>Focus</dt><dd>Mechanical design, vehicle dynamics</dd></div>
+        <div><dt>CAD</dt><dd>SolidWorks, Onshape</dd></div>
+        <div><dt>Team</dt><dd>Terps Racing, suspension</dd></div>
+        <div><dt>Seeking</dt><dd>Summer 2027 internship</dd></div>
+      </dl>
     </section>
 
     <section class="section" id="projects">
       <h2>Projects</h2>
+      <div class="sheets">
 
+      <!-- ===== Sheet 1: ENES100 OTV ===== -->
+      <article class="project" aria-labelledby="p-otv">
+        <div class="project-head">
+          <p class="sheet-no">SHEET 1 OF 5 · FALL 2025</p>
+          <h3 id="p-otv">Autonomous Mission Robot</h3>
+          <p class="summary">An eight-person team built a small autonomous vehicle that drives through an obstacle course, finds the one plot of soil a seed can grow in, plants a lima bean in it, and carries a sample of the other soil to the finish. I led the team and did the CAD for the vehicle and its mission mechanism.</p>
+        </div>
+
+        <dl class="titleblock">
+          <div><dt>Role</dt><dd>Team leader, CAD lead</dd></div>
+          <div><dt>Course</dt><dd>ENES100, Intro to Engineering Design</dd></div>
+          <div><dt>Team</dt><dd>8 students (“Seed Squad”)</dd></div>
+          <div><dt>Tools</dt><dd>Onshape, 3D printing, shop tools</dd></div>
+        </dl>
+
+        <div class="shots-pair side">
+          <figure class="shot drawing">
+            <img src="assets/otv-assembly.png" width="1620" height="1254" loading="lazy" alt="Onshape assembly drawing of the robot, drawn by Brady Sifert: plywood chassis on four mecanum wheels, battery box at the rear under the ArUco marker, controller and H-bridge in the middle, and the four-bar mission arm with camera, two servos and a bucket at the front.">
+            <figcaption>Full assembly, drawn in Onshape. Battery at the rear balances the arm at the front.</figcaption>
+          </figure>
+          <figure class="shot drawing">
+            <img src="assets/otv-mission-apparatus.png" width="1361" height="1050" loading="lazy" alt="Drawing of the mission apparatus: a 3D-printed mount holding a parallel four-bar linkage driven by Servo A, with Servo B tilting a bucket at the end and a camera on top.">
+            <figcaption>Mission apparatus: four-bar arm, bucket servo and camera mount.</figcaption>
+          </figure>
+        </div>
+
+        <div class="project-body">
+          <div>
+            <h4>The mission</h4>
+            <p>Navigate to the mission site, work out which of the plots holds plantable soil, plant a lima bean at least 10 mm deep, collect at least 10 g of the unplantable soil, and drive on to the finish under a limbo bar. The whole vehicle had to stay under 3 kg and $320.</p>
+
+            <h4>What I did</h4>
+            <ul>
+              <li><strong>Designed the vehicle in Onshape</strong> and produced the assembly and subsystem drawings the team built from.</li>
+              <li><strong>Sized the chassis for weight and fit.</strong> A ¼-inch plywood base, 7 × 8 in, comes to about 125 g against a 200 g budget. The 203 × 178 mm footprint stays well under the 250 mm limit we set so it could squeeze between obstacles.</li>
+              <li><strong>Designed the mission arm.</strong> Our first concepts were cranes and helical screws, which were too complex to build. We switched to a parallel four-bar linkage. It keeps the bucket level as it swings down, so one servo gives both reach and depth. A second, small servo tilts the bucket to dig, and the seed rides in a pocket at the back of the bucket.</li>
+              <li><strong>Balanced the vehicle.</strong> Most of the mass sits in the arm at the front, so I placed the battery at the rear to keep the center of gravity low and central and stop the robot tipping during the dig.</li>
+              <li><strong>Built it.</strong> I cut and machined the chassis with hand and power tools, designed and 3D-printed the PLA arm mount and eight motor mounts, helped assemble the drivetrain, and built the team’s practice mission site.</li>
+              <li><strong>Redesigned after a failure.</strong> In testing the scooping mechanism didn’t pick up a reliable sample, so we replaced it with an adhesive-based retrieval system.</li>
+            </ul>
+          </div>
+
+          <div class="notes">
+            <div>
+              <h4>Key numbers</h4>
+              <table class="specs">
+                <tbody>
+                  <tr><th scope="row">Mass limit</th><td>3 kg</td></tr>
+                  <tr><th scope="row">Budget limit</th><td>$320</td></tr>
+                  <tr><th scope="row">Chassis base</th><td>7 × 8 × ¼ in ply, ≈125 g</td></tr>
+                  <tr><th scope="row">Footprint</th><td>≈203 × 178 mm</td></tr>
+                  <tr><th scope="row">Arm servo</th><td>40 kg·cm, 180°</td></tr>
+                  <tr><th scope="row">Bucket servo</th><td>1.5 kg·cm, 270°, 9 g</td></tr>
+                  <tr><th scope="row">Drive</th><td>4 × DC motors, mecanum wheels</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="note">
+              <p><strong>Working across sub-teams.</strong> The arm had to leave the camera a clear view of the plots and fit the navigation team’s approach path. The camera reads each plot’s average color to find the plantable one, and mecanum wheels let the robot slide sideways from one plot to the next without turning.</p>
+            </div>
+            <div class="note">
+              <p><strong>Running the team.</strong> I wrote our team charter and built the project-management sheet that tracked every milestone’s tasks, owners and dates across the semester.</p>
+            </div>
+            <div>
+              <h4>Skills used</h4>
+              <ul class="stack">
+                <li>Onshape</li><li>Engineering drawings</li><li>3D printing (PLA)</li><li>Woodworking &amp; machining</li><li>Mechanism design</li><li>Prototyping &amp; testing</li><li>Project management</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ===== Sheet 2: Terps Racing ===== -->
+      <article class="project" aria-labelledby="p-racing">
+        <div class="project-head">
+          <p class="sheet-no">SHEET 2 OF 5 · SEPT 2025 – PRESENT</p>
+          <h3 id="p-racing">Terps Racing Suspension</h3>
+          <p class="summary">I’m a member of the vehicle dynamics and suspension sub-team on Terps Racing, Maryland’s internal-combustion racing team. The team designs and builds the car’s whole suspension every year to improve steering, stability and driver feedback.</p>
+        </div>
+
+        <dl class="titleblock">
+          <div><dt>Role</dt><dd>Sub-team member</dd></div>
+          <div><dt>Sub-team</dt><dd>Vehicle dynamics &amp; suspension</dd></div>
+          <div><dt>Since</dt><dd>September 2025</dd></div>
+          <div><dt>Tools</dt><dd>SolidWorks, FEA, prototyping</dd></div>
+        </dl>
+
+        <figure class="diagram">
+          <div class="scroll">
+            <svg viewBox="0 0 720 300" role="img" aria-labelledby="dg-title dg-desc">
+              <title id="dg-title">Side-view anti-dive geometry</title>
+              <desc id="dg-desc">A car in side view. A line from the front tire contact patch through the front suspension’s side-view instant center is compared with a reference line from the same contact patch to the center of gravity height above the rear axle. The ratio of their slopes is the percent anti-dive.</desc>
+              <!-- ground -->
+              <line class="d-ground" x1="20" y1="250" x2="700" y2="250"/>
+              <!-- body outline -->
+              <path class="d-body" d="M95 175 L140 120 L330 105 L420 70 L520 70 L600 110 L640 125 L640 180 L95 180 Z"/>
+              <!-- wheels: rear at x=170, front at x=560, r=48 -->
+              <circle class="d-wheel" cx="170" cy="202" r="48"/>
+              <circle class="d-wheel" cx="560" cy="202" r="48"/>
+              <!-- front control arms, angled in side view, converging toward the IC -->
+              <line class="d-arm" x1="560" y1="178" x2="490" y2="168"/>
+              <line class="d-arm" x1="560" y1="218" x2="490" y2="216"/>
+              <!-- construction lines from arms to instant center at (300,140) -->
+              <line class="d-con" x1="490" y1="168" x2="300" y2="140"/>
+              <line class="d-con" x1="490" y1="216" x2="300" y2="140"/>
+              <!-- line from front contact patch through IC -->
+              <line class="d-con" x1="560" y1="250" x2="300" y2="140"/>
+              <!-- 100% anti-dive reference: contact patch to CG height over rear axle -->
+              <line class="d-ref" x1="560" y1="250" x2="170" y2="135"/>
+              <line class="d-ref" x1="170" y1="250" x2="170" y2="135"/>
+              <line class="d-ref" x1="170" y1="135" x2="380" y2="135"/>
+              <!-- IC -->
+              <circle class="d-dot" cx="300" cy="140" r="5"/>
+              <text class="d-label acc" x="248" y="128">SVIC</text>
+              <!-- CG -->
+              <circle class="d-cg" cx="380" cy="135" r="9"/>
+              <path class="d-cgq" d="M380 135 L380 126 A9 9 0 0 1 389 135 Z M380 135 L380 144 A9 9 0 0 1 371 135 Z"/>
+              <text class="d-label" x="394" y="130">CG</text>
+              <!-- contact patch -->
+              <circle class="d-dot" cx="560" cy="250" r="4"/>
+              <text class="d-label" x="610" y="272" text-anchor="middle">front contact patch</text>
+              <!-- height and wheelbase dims -->
+              <text class="d-label" x="178" y="146">h</text>
+              <line class="d-ref" x1="170" y1="282" x2="560" y2="282"/>
+              <text class="d-label" x="345" y="276">L</text>
+              <text class="d-label acc" x="500" y="244">θ</text>
+            </svg>
+          </div>
+          <figcaption>Anti-dive in side view: % anti-dive ≈ tan θ ÷ (h / L) × front brake share. Pointing the arms at an instant center lets braking load go through the links instead of compressing the springs.</figcaption>
+        </figure>
+
+        <div class="project-body">
+          <div>
+            <h4>The work</h4>
+            <ul>
+              <li>Help design, build and test the suspension each season using SolidWorks, finite element analysis, a range of production methods, and prototyping.</li>
+              <li>Work toward better driver steering, stability and feedback, which is the sub-team’s goal for the car.</li>
+            </ul>
+
+            <h4>Technical brief: anti-squat and anti-dive</h4>
+            <p>In September 2026 I prepared a short presentation for the sub-team on how suspension geometry keeps the car level under throttle and brakes.</p>
+            <ul>
+              <li><strong>Anti-dive</strong> (front, braking) stops the nose from dropping when the driver brakes. It’s set by angling the front arms in side view.</li>
+              <li><strong>Anti-squat</strong> (rear, acceleration) stops the tail from dropping on throttle. It’s set by angling the rear arms.</li>
+              <li><strong>Why it matters:</strong> less pitch keeps ride height and ground clearance steady, holds camber on target so the tires keep their contact patch, and makes the car respond faster because load goes through the links right away.</li>
+              <li><strong>The trade-off:</strong> too much makes the car harsh over bumps and dulls what the driver feels.</li>
+            </ul>
+          </div>
+          <div class="notes">
+            <div>
+              <h4>Skills used</h4>
+              <ul class="stack">
+                <li>SolidWorks</li><li>FEA</li><li>Vehicle dynamics</li><li>Suspension geometry</li><li>Prototyping</li><li>Technical presenting</li>
+              </ul>
+            </div>
+            <div class="note">
+              <p><strong>Why this team.</strong> Cars are the reason I chose mechanical engineering. I joined Terps Racing in my first month at Maryland to get hands-on time with a real vehicle, from CAD to the finished car.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ===== Sheet 3: Internship Tracker ===== -->
       <article class="project" aria-labelledby="p-tracker">
         <div class="project-head">
+          <p class="sheet-no">SHEET 3 OF 5 · 2026</p>
           <h3 id="p-tracker">Internship Tracker</h3>
-          <p class="summary">A web app that turns an 85-company internship spreadsheet into a ranked to-do list. It tells me which application needs attention today, and why.</p>
+          <p class="summary">A web app that turns my 85-company internship spreadsheet into a ranked to-do list. It tells me which application needs attention today, and why.</p>
           <ul class="links">
             <li><a class="btn primary" href="https://bsifert.github.io/Internship-tracker/">Open the live app ↗</a></li>
             <li><a class="btn" href="https://github.com/bsifert/Internship-tracker">Source code ↗</a></li>
@@ -223,16 +444,16 @@ footer { margin-top: 3rem; padding-top: 1.25rem; border-top: 1px solid var(--rul
           <div><dt>Role</dt><dd>Designer &amp; developer</dd></div>
           <div><dt>Built</dt><dd>2026</dd></div>
           <div><dt>Type</dt><dd>Single-page web app</dd></div>
-          <div><dt>Status</dt><dd>Live</dd></div>
+          <div><dt>Status</dt><dd>Live, in daily use</dd></div>
         </dl>
 
         <div class="shots-pair">
           <figure class="shot">
-            <img src="assets/tracker-overview.jpg" width="2720" height="1400" alt="Internship Tracker dashboard: ten summary tiles (tracked, applied, overdue, due within 14 days and more) above a 'Do these next' list ranking companies by deadline and follow-up urgency.">
+            <img src="assets/tracker-overview.jpg" width="2720" height="1400" loading="lazy" alt="Internship Tracker dashboard: ten summary tiles (tracked, applied, overdue, due within 14 days and more) above a 'Do these next' list ranking companies by deadline and follow-up urgency.">
             <figcaption>Dashboard and “Do these next” ranking. Company names are sample data.</figcaption>
           </figure>
           <figure class="shot">
-            <img src="assets/tracker-board.jpg" width="2720" height="1240" alt="Urgency board with four columns (Live, Imminent, Watch, Unresearched), each holding company cards with priority, cover-letter status and deadline badges.">
+            <img src="assets/tracker-board.jpg" width="2720" height="1240" loading="lazy" alt="Urgency board with four columns (Live, Imminent, Watch, Unresearched), each holding company cards with priority, cover-letter status and deadline badges.">
             <figcaption>Urgency board: companies grouped by how soon their postings open.</figcaption>
           </figure>
         </div>
@@ -248,7 +469,7 @@ footer { margin-top: 3rem; padding-top: 1.25rem; border-top: 1px solid var(--rul
               <li><strong>Urgency board and table.</strong> A board groups companies by research status. A sortable, filterable table supports multi-select bulk edits.</li>
               <li><strong>Application history.</strong> Every status change is timestamped, so each company has a timeline from first look to offer.</li>
               <li><strong>Spreadsheet round-trip.</strong> Exports to JSON or CSV. Importing a CSV from Google Sheets merges by company name: it updates existing rows, adds new ones, and leaves out-of-file columns alone.</li>
-              <li><strong>No account needed.</strong> Data autosaves in the browser. Because that is fragile, the app reminds me to download a backup when the last one gets old.</li>
+              <li><strong>No account needed.</strong> Data autosaves in the browser, and the app reminds me to download a backup when the last one gets old.</li>
             </ul>
           </div>
 
@@ -256,59 +477,156 @@ footer { margin-top: 3rem; padding-top: 1.25rem; border-top: 1px solid var(--rul
             <div>
               <h4>Built with</h4>
               <ul class="stack">
-                <li>TypeScript</li><li>React 19</li><li>Vite</li><li>Tailwind CSS</li><li>oxlint</li><li>GitHub Actions</li><li>GitHub Pages</li>
+                <li>TypeScript</li><li>React 19</li><li>Vite</li><li>Tailwind CSS</li><li>GitHub Actions</li><li>GitHub Pages</li>
               </ul>
             </div>
             <div class="note">
-              <p><strong>Safe upgrades for saved data.</strong> New fields like posting links and follow-up dates were added after the app was already in use. Every record loaded from storage or from a backup is normalized first, so older saves never crash the newer version.</p>
+              <p><strong>Safe upgrades for saved data.</strong> New fields like posting links and follow-up dates were added after the app was already in use. Every saved record is normalized when it loads, so older saves never break the newer version.</p>
             </div>
             <div class="note">
-              <p><strong>Cleaning up the original data.</strong> The sheet had been exported through a PDF, which cut long notes off mid-sentence. The app detects those rows and flags them to be rewritten.</p>
-            </div>
-            <div class="note">
-              <p><strong>Automated deploys.</strong> A GitHub Actions workflow type-checks, builds and publishes the site to GitHub Pages automatically.</p>
+              <p><strong>Automated deploys.</strong> A GitHub Actions workflow type-checks, builds and publishes the site on every push.</p>
             </div>
           </div>
         </div>
       </article>
 
-      <!--
-        ADD MORE PROJECTS: copy the whole <article class="project"> … </article> block above,
-        paste it here, and change the text, links and images. Projects don't have to be
-        software; class projects, design work, research and lab builds all fit this layout.
-        Put screenshots or photos in the assets/ folder.
-      -->
+      <div class="minis">
+        <!-- ===== Sheet 4: Balsa bridge ===== -->
+        <article class="project" aria-labelledby="p-bridge">
+          <div class="project-head">
+            <p class="sheet-no">SHEET 4 OF 5 · 2022 – 2024</p>
+            <h3 id="p-bridge">Balsa Wood Truss Bridge</h3>
+            <p class="summary">A hand-built balsa bridge that held over 300 lb, a school record, for Project Lead the Way engineering.</p>
+          </div>
+          <dl class="titleblock">
+            <div><dt>Program</dt><dd>Project Lead the Way</dd></div>
+            <div><dt>Result</dt><dd>300+ lb, school record</dd></div>
+          </dl>
+          <div class="project-body">
+            <div>
+              <ul>
+                <li>Chose a truss geometry and sized each member from statics and material properties.</li>
+                <li>Designed the joints and gusset plates, where light bridges usually fail first.</li>
+                <li>In the same program, built hydrogen fuel-cell cars and tuned them for efficiency.</li>
+              </ul>
+              <ul class="stack">
+                <li>Truss design</li><li>Statics</li><li>Materials</li><li>Hand fabrication</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <!-- ===== Sheet 5: Research ===== -->
+        <article class="project" aria-labelledby="p-research">
+          <div class="project-head">
+            <p class="sheet-no">SHEET 5 OF 5 · 2025 – 2026</p>
+            <h3 id="p-research">Engineering Research &amp; Writing</h3>
+            <p class="summary">Semester-long research on what it really takes to make a “sustainable” car part, plus a research paper on the energy transition.</p>
+          </div>
+          <dl class="titleblock">
+            <div><dt>Courses</dt><dd>ENES200, JOUR130</dd></div>
+            <div><dt>Output</dt><dd>Systems maps, final papers</dd></div>
+          </dl>
+          <div class="project-body">
+            <div>
+              <ul>
+                <li><strong>“Putting the Brakes on Waste” (ENES200, Spring 2026).</strong> Traced Brembo’s recycled-aluminum racing brake caliper back through its supply chain: bauxite mining in Guinea, smelting, refining waste (“red mud”), FIA and Euro 7 rules, and end-of-life recycling. Built and revised a sociotechnical systems map and judged industry data by who produced it and why.</li>
+                <li><strong>Energy research paper (JOUR130, Fall 2025).</strong> A sourced paper on rising electricity demand and the move from fossil fuels to renewable generation.</li>
+              </ul>
+              <ul class="stack">
+                <li>Systems thinking</li><li>Source evaluation</li><li>Technical writing</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      </div>
     </section>
 
-    <section class="section" id="about">
-      <h2>About</h2>
+    <section class="section" id="experience">
+      <h2>Experience &amp; leadership</h2>
+
+      <h3 class="subhead">Work</h3>
+      <ul class="log">
+        <li>
+          <span class="when">Jun 2023 – present</span>
+          <div>
+            <h3>Front Desk Manager &amp; Coach <span class="org">· Dutch Total Soccer, Somerset, NJ</span></h3>
+            <p>Run lunches and camp logistics for 200+ campers a week and fix scheduling and customer problems as they come up. Coach 15+ campers a week in basic and advanced soccer.</p>
+          </div>
+        </li>
+        <li>
+          <span class="when">Oct 2023 – Aug 2024</span>
+          <div>
+            <h3>Kitchen Worker &amp; Delivery Driver <span class="org">· Ciro’s Pizza and Deli, Warren, NJ</span></h3>
+            <p>Managed kitchen inventory and kept orders accurate during high-volume rushes. Delivered orders on time.</p>
+          </div>
+        </li>
+      </ul>
+
+      <h3 class="subhead">Leadership</h3>
+      <ul class="log">
+        <li>
+          <span class="when">May 2026 – present</span>
+          <div>
+            <h3>Risk Reduction Chair <span class="org">· Sigma Nu, Delta Phi Chapter, UMD</span></h3>
+            <p>Elected to the executive board. Lead risk management, keep the chapter compliant with university, national and IFC policy, and serve as the main contact in emergencies, coordinating with university officials and national headquarters.</p>
+          </div>
+        </li>
+        <li>
+          <span class="when">Dec 2025 – present</span>
+          <div>
+            <h3>Social Chair <span class="org">· UMD Club Soccer</span></h3>
+            <p>Plan and run club events that build the team and help recruiting.</p>
+          </div>
+        </li>
+        <li>
+          <span class="when">Nov 2021 – Jun 2025</span>
+          <div>
+            <h3>Class President, all four years <span class="org">· Watchung Hills Regional High School</span></h3>
+            <p>Led student government, ran school-wide events with 1,000+ attendees, and pushed for student-focused policy changes directly with school administrators. Named Somerset County Scholar Athlete of the Year.</p>
+          </div>
+        </li>
+        <li>
+          <span class="when">Nov 2023 – Jun 2025</span>
+          <div>
+            <h3>Volunteer Fundraiser <span class="org">· Leukemia &amp; Lymphoma Society, Student Visionaries of the Year</span></h3>
+            <p>Raised over $2,000 in a six-week campaign, part of a $25,000 team total.</p>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <section class="section" id="skills">
+      <h2>Skills &amp; coursework</h2>
       <div class="about">
         <div>
-          <!-- EDIT: rewrite in your own words. Two short paragraphs is plenty. -->
-          <p>I’m a student at the University of Maryland studying <span class="todo">your major</span>. I’m looking for a <span class="todo">Summer 2027 internship in …</span>.</p>
-          <p>I like turning messy, manual processes into tools that do the bookkeeping. The Internship Tracker started as a spreadsheet I kept losing track of, and it now runs my own search.</p>
+          <p>I want to work where design meets hardware, especially vehicles, aerospace and energy systems. Long term I’d like to run my own mechanical engineering business.</p>
+          <p>I learn fastest by building. On the robot team that meant cutting the chassis myself and rebuilding the parts that failed. On Terps Racing it means learning the vehicle dynamics behind the parts we make. Outside class I play club soccer and golf (10 handicap).</p>
         </div>
         <dl class="facts">
-          <div><dt>Looking for</dt><dd><span class="todo">Summer 2027 internship</span></dd></div>
-          <div><dt>Based in</dt><dd><span class="todo">City, State</span> · open to relocating</dd></div>
-          <div><dt>Tools</dt><dd>TypeScript, React, Git &amp; GitHub, <span class="todo">Excel, AutoCAD, …</span></dd></div>
+          <div><dt>CAD &amp; analysis</dt><dd><ul class="stack"><li>SolidWorks</li><li>Onshape</li><li>Engineering drawings</li><li>FEA (team use)</li></ul></dd></div>
+          <div><dt>Fabrication</dt><dd><ul class="stack"><li>3D printing</li><li>Hand &amp; power tools</li><li>Woodworking</li><li>Prototyping &amp; testing</li></ul></dd></div>
+          <div><dt>Programming &amp; data</dt><dd><ul class="stack"><li>Python</li><li>MATLAB</li><li>Excel</li><li>TypeScript / React</li></ul></dd></div>
+          <div><dt>Coursework</dt><dd>CAD Design in SolidWorks (ENME272), Dynamics, Mechanics I &amp; II, Differential Equations (MATH246), Intro to Engineering Design (ENES100)</dd></div>
+          <div><dt>Languages</dt><dd>English, basic Spanish</dd></div>
         </dl>
       </div>
     </section>
 
     <section class="section contact" id="contact">
       <h2>Contact</h2>
-      <p>I’m happy to walk through any of this in more detail.</p>
-      <!-- EDIT: replace with the email you want employers to use. -->
-      <p class="big"><a href="mailto:you@example.com"><span class="todo">you@example.com</span></a></p>
+      <p>I’m looking for a Summer 2027 mechanical engineering internship. I’m happy to walk through any of these projects in more detail.</p>
+      <p class="big"><a href="mailto:brady.sifert@gmail.com">brady.sifert@gmail.com</a></p>
       <ul class="links">
+        <li><a class="btn" href="https://www.linkedin.com/in/bradysifert">linkedin.com/in/bradysifert ↗</a></li>
         <li><a class="btn" href="https://github.com/bsifert">github.com/bsifert ↗</a></li>
-        <li><a class="btn" href="https://www.linkedin.com/in/your-handle">LinkedIn ↗</a></li>
       </ul>
     </section>
   </main>
 
-  <footer>Brady Sifert · Updated October 2026</footer>
+  <footer>Brady Sifert · College Park, MD &amp; Warren, NJ · Updated October 2026</footer>
 </div>
 </body>
 </html>
