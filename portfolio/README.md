@@ -5,14 +5,14 @@ CSS with no build step: open `index.html` in a browser to preview it.
 
 ## What's on it
 
-Written for recruiters. A dark "drafting table" hero states what I'm looking
-for (Summer 2027 mechanical engineering internship) with the bell crank drawn
-beside it and four headline numbers. Then four project "sheets", experience,
-skills, and a closing contact band.
+Written for recruiters. A plain header states what I'm looking for (Summer 2027
+mechanical engineering internship) beside a "Quick facts" box (education, GPA,
+skills, location, email). Then four project "sheets", experience, skills, and
+a closing contact band.
 
 1. **Minimum-Mass Titanium Bell Crank** (Terps Racing challenge): 38.87 g blank
-   to 8.85 g in 0.125 in Ti-5Al-2.5Sn, FOS 1.76 and 0.098 mm deflection. Both
-   bell crank drawings (hero and sheet) are generated from
+   to 8.85 g in 0.125 in Ti-5Al-2.5Sn, FOS 1.76 and 0.098 mm deflection. The
+   bell crank drawing is generated from
    `Bellcrank_0125in_8p85g.dxf` (dimensions in mm); `assets/bellcrank-fea.png`
    holds the stress plots.
 2. **Suspension & Vehicle Dynamics** (Terps Racing): sub-team role and the
